@@ -103,6 +103,7 @@ public class OrderService {
     private CartItemResponse mapOrderItemToCartItemResponse(OrderItem orderItem) {
         return new CartItemResponse(
                 orderItem.getId(),
+                orderItem.getProduct().getId(),
                 orderItem.getOrder().getUser().getId(),
                 orderItem.getProduct().getName(),
                 (long)(orderItem.getPriceAtPurchase()),

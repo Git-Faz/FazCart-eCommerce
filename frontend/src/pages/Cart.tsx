@@ -19,6 +19,11 @@ const Cart = (): JSX.Element => {
     const { mutate: deleteItem, isPending: isDeleting } = useDeleteCartItem();
     const { mutate: clearCart, isPending: isClearing } = useClearCart();
 
+    console.log(cart);
+console.log(cart?.[0]);
+console.log(cart?.[0]?.productId);
+    
+
     if (!isLoggedIn) {
         return (
             <>
@@ -47,7 +52,9 @@ const Cart = (): JSX.Element => {
                 <h1 id="title" >My Cart</h1>
                 <div>
                     {
-                        cart.map((item: any) => (
+                        cart.map((item: any) => { 
+                            console.log(item);
+                            return (
                             <CartItemCard
                                 key={item.id}
                                 name={item.productName}
@@ -55,6 +62,7 @@ const Cart = (): JSX.Element => {
                                 price={item.productPrice}
                                 quantity={item.quantity}
                                 total={item.totalPrice}
+                                onClick={() => navigate(`/products/${item.productId}`)}
                                 onDelete={() => {
                                     deleteItem(item.id)
                                     toast.success(`Removed item: ${item.productName}`)
@@ -62,7 +70,8 @@ const Cart = (): JSX.Element => {
                                 disabled={isDeleting}
                                 classname="min-w-fit w-3xl shadow-blue-300 shadow-md dark:shadow-none disabled:cursor-not-allowed "
                             />
-                        ))
+                            
+                        )})
                     }
                 </div>
                 <div className="flex justify-end gap-x-5 mx-auto min-w-fit w-3xl max-w-3xl">

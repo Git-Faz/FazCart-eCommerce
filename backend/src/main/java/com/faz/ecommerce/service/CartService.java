@@ -103,6 +103,7 @@ public class CartService {
     public CartItemResponse mapToCartResponse(CartItem item) {
         return new CartItemResponse(
                 item.getId(),
+                item.getProduct().getId(),
                 item.getUser().getId(),
                 item.getProduct().getName(),
                 item.getProduct().getPrice(),

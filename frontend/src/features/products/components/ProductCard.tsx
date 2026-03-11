@@ -14,7 +14,7 @@ const ProductCard = ({ img, name, price, onClick, onBtnClick, disabled, classnam
     return (
         <Card id="productCard" className="p-0 dark:shadow-sm shadow-blue-300 dark:shadow-blue-400 flex flex-col max-w-60 w-55 min-w-46 min-h-fit h-100">
             <div onClick={onClick}>
-                <img src={img.link} alt={img.alt} className="w-full max-w-60 min-h-54 h-full max-h-54 p-0 m-0 gap-0 border-b border-purple-200 rounded-t-lg"></img>
+                <img src={img.link} alt={img.alt} loading="lazy" className="w-full max-w-60 min-h-54 h-full max-h-54 p-0 m-0 gap-0 border-b border-purple-200 rounded-t-lg"></img>
             </div>
             <CardHeader className="gap-0 px-3 text-center" onClick={onClick}>
                 <CardTitle>{name}</CardTitle>
