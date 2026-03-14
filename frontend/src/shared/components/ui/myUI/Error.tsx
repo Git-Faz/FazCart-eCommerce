@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 
 interface ErrorStateProps {
-  errorMsg: string, desClassName?: string
+  errorTitle?: string,errorMsg: string, desClassName?: string
 }
 
 const container = {
@@ -27,9 +27,9 @@ const letter = {
   }
 };
 
-export default function Error({ errorMsg, desClassName }: ErrorStateProps): JSX.Element {
+export default function Error({ errorTitle = "ERROR" ,errorMsg, desClassName }: ErrorStateProps): JSX.Element {
 
-  const text = "ERROR".split("");
+  const text = errorTitle.split("");
 
   return (
     <div className="w-full h-full m-auto">
@@ -37,7 +37,7 @@ export default function Error({ errorMsg, desClassName }: ErrorStateProps): JSX.
         variants={container}
         initial="initial"
         animate="animate"
-        className="errorTitle mx-auto w-full font-[shock] text-[150px] text-center dark:text-blue-500/50 text-amber-300"
+        className="errorTitle mx-auto w-full font-[shock] sm:text-xl md:text-[150px] text-center dark:text-blue-500/50 text-amber-300"
       >
         {text.map((char, index) => (
           <motion.span

@@ -5,7 +5,7 @@ import Body from "@/shared/components/layout/Body";
 function Home(): JSX.Element {
 
     return (
-        <Body classname="w-full h-full py-20 px-10">
+        <Body classname="mx-auto h-full w-full max-w-7xl px-2 py-5 sm:px-3 md:px-4 md:py-8 lg:px-4 lg:py-10">
             <ProductsList/>
         </Body>
     );

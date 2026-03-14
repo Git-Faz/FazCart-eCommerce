@@ -20,7 +20,7 @@ export const RegisterForm = (): JSX.Element => {
     const [formData, setFormData] = useState<RegisterReq>(initialForm);
     const [errors, setErrors] = useState<FormErrors>({});
     const dispatch = useAppDispatch();
-    const { isLoading, isLoggedIn, error } = useAuth();
+    const { isLoading, error } = useAuth();
 
     useEffect(() => {
         if (error) {

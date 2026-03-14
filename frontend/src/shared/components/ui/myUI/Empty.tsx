@@ -38,12 +38,14 @@ export default function Empty({message, desClassName}: EmptyStateProps): JSX.Ele
     const bg = theme === "dark" ? darkBg : lightBg;
 
   return (
-    <div className="w-full h-full m-auto bg-contain bg-no-repeat ">
+    <div
+      className="m-auto flex h-full w-full shrink flex-col bg-contain bg-no-repeat"
+    >
       <motion.h1
         variants={container}
         initial="initial"
         animate="animate"
-        className="errorTitle mx-auto w-full font-[shock] text-[150px] text-center dark:text-blue-500/50 text-amber-300"
+        className="errorTitle mx-auto w-full font-[shock] text-[75px] sm:text-[75px] md:text-[150px] text-center dark:text-blue-500/50 text-amber-300"
       >
         {text.map((char, index) => (
           <motion.span

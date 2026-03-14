@@ -12,9 +12,9 @@ import { type OrderProp } from "../types";
 const OrderCard = ({ id, items, totalAmount, status }: OrderProp): JSX.Element => {
   return (
     <Item variant={"default"} 
-    className="min-w-[50%] max-w-fit w-fit mx-10 mt-10 dark:bg-gray-800 dark:text-white shadow-blue-200 shadow-md  dark:shadow-none ">
+    className="mx-0 mt-4 w-full max-w-full dark:bg-gray-800 dark:text-white shadow-md shadow-blue-200 dark:shadow-none sm:mt-6 sm:mx-2">
       <ItemContent className="text-black dark:text-white">
-        <ItemTitle className="text-2xl">Order #{id}</ItemTitle>
+        <ItemTitle className="w-full text-xl sm:text-2xl">Order #{id}</ItemTitle>
         <ItemDescription className="flex flex-col dark:text-white">
           
             <span className="text-xl"> Items: </span>
@@ -33,9 +33,9 @@ const OrderCard = ({ id, items, totalAmount, status }: OrderProp): JSX.Element =
         
         </ItemDescription>
       </ItemContent>
-      <ItemActions className="align-top text-sm flex-col">
-        <button className="p-2 text-[14px] bg-blue-200 dark:bg-blue-500 dark:hover:bg-blue-200 dark:hover:text-black hover:bg-blue-400 rounded-md min-w-35 max-w-fit">Exchange / Refund</button>
-        <button className="p-2 text-[14px] bg-blue-200 dark:bg-blue-500 dark:hover:bg-blue-200 dark:hover:text-black hover:bg-blue-400 rounded-md min-w-35 max-w-fit">View Details</button>
+      <ItemActions className="align-top flex w-full flex-wrap gap-2 text-sm sm:w-auto sm:flex-col">
+        <button className="max-w-full min-w-28 rounded-md bg-blue-200 p-2 text-[14px] hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-200 dark:hover:text-black">Exchange / Refund</button>
+        <button className="max-w-full min-w-28 rounded-md bg-blue-200 p-2 text-[14px] hover:bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-200 dark:hover:text-black">View Details</button>
       </ItemActions>
     </Item>
   )

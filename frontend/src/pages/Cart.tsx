@@ -28,9 +28,7 @@ console.log(cart?.[0]?.productId);
 
     if (!isLoggedIn) {
         return (
-            <>
-                <h1>Please log in to view cart</h1>
-            </>
+            <Error errorTitle="LOGIN" errorMsg="To view your CART ..."></Error>
         )
     }
 
@@ -50,7 +48,7 @@ console.log(cart?.[0]?.productId);
     const handleCheckout = () => navigate('/checkout')
 
     return (
-        <Body classname="mx-20 p-5 min-w-fit w-full max-w-3xl">
+        <Body classname="mx-auto w-full max-w-4xl px-4 py-5 sm:px-6">
                 <h1 id="title" >My Cart</h1>
                 <div>
                     {
@@ -70,13 +68,13 @@ console.log(cart?.[0]?.productId);
                                     toast.success(`Removed item: ${item.productName}`)
                                 }}
                                 disabled={isDeleting}
-                                classname="min-w-fit w-3xl shadow-blue-300 shadow-md dark:shadow-none disabled:cursor-not-allowed "
+                                classname="mx-0 w-full shadow-md shadow-blue-300 dark:shadow-none disabled:cursor-not-allowed"
                             />
                             
                         )})
                     }
                 </div>
-                <div className="flex justify-end gap-x-5 mx-auto min-w-fit w-3xl max-w-3xl">
+                <div className="mx-auto flex w-full flex-wrap items-center justify-end gap-3">
 
                     <Button variant={"destructive"} size={"sm"} onClick={() => clearCart()} 
                      disabled={isClearing}

@@ -8,26 +8,32 @@ import {
 import type { JSX } from "react";
 import type { ProductCardProps } from "../types";
 import { ShoppingCartIcon as Cart } from "lucide-react";
+import { cn } from "@/shared/utils/utils";
 
 
 const ProductCard = ({ img, name, price, onClick, onBtnClick, disabled, classname }: ProductCardProps): JSX.Element => {
     return (
-        <Card id="productCard" className="p-0 dark:shadow-sm shadow-blue-300 dark:shadow-blue-400 flex flex-col max-w-60 w-55 min-w-46 min-h-fit h-100">
+        <Card
+            id="productCard"
+            className={cn(
+            "relative flex flex-col pb-5 pt-0 w-full min-w-0 h-full gap-3 rounded-lg cursor-pointer backdrop-blur-md transition-shadow duration-200 ease-out sm:min-h-92 shadow-blue-300 dark:shadow-sm dark:shadow-blue-400 bg-white/90 dark:bg-gray-800/90 border border-black/5 dark:border-white/10 text-gray-900 dark:text-white",classname
+            )}>   
             <div onClick={onClick}>
-                <img src={img.link} alt={img.alt} loading="lazy" className="w-full max-w-60 min-h-54 h-full max-h-54 p-0 m-0 gap-0 border-b border-purple-200 rounded-t-lg"></img>
+                <img src={img.link} alt={img.alt} loading="lazy" className="m-0 h-48 w-full gap-0 rounded-t-lg border-b border-purple-200 object-cover p-0 sm:h-54"></img>
             </div>
-            <CardHeader className="gap-0 px-3 text-center" onClick={onClick}>
+            <CardHeader className="gap-0 px-3 py-2 text-center" onClick={onClick}>
                 <CardTitle>{name}</CardTitle>
             </CardHeader>
-            <CardContent className="gap-0 text-center" >
+
+            <CardContent className="gap-0 text-center p-b" >
                 <p>₹{price}</p>
             </CardContent>
             <CardAction className="self-center">
                 <button
                     onClick={onBtnClick}
                     disabled={disabled}
-                    className="flex justify-between p-2 min-w-fit w-30 my-1 mx-auto text-center bg-purple-300 text-neutral-800 
-                    hover:text-white text-sm rounded-md transition-all duration-200 ease-in hover:bg-purple-500 focus:bg-purple-500
+                    className="mx-auto my-1 flex min-w-fit w-auto justify-between gap-2 rounded-md bg-purple-300 px-3 py-2 text-center text-sm text-neutral-800
+                    hover:text-white transition-all duration-200 ease-in hover:bg-purple-500 focus:bg-purple-500
                      disabled:cursor-not-allowed disabled:bg-gray-400
                     ">
                     Add to cart <Cart size={"20px"} />

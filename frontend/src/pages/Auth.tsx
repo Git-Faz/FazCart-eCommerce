@@ -23,9 +23,9 @@ const Auth = () => {
 
   return (
     <Body>
-    <div className="mt-10 min-h-fit flex items-center justify-center">
-      <div className="space-y-6">
-        <div className="flex gap-4 justify-center">
+    <div className="mt-6 flex min-h-fit items-center justify-center px-4 pb-4 sm:mt-10">
+      <div className="w-full max-w-xl space-y-6">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           <button
             onClick={() => setMode("login")}
             className={`px-4 py-2 rounded ${mode === "login"

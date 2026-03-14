@@ -10,14 +10,14 @@ const UserInfoCard = ({name, email, onLogout}: UserInfo): JSX.Element => {
     const navigate = useNavigate(); 
 
     return (
-        <Card className="min-w-fit w-4xl max-w-full">
+        <Card className="w-full max-w-4xl min-w-0 dark:border-none dark:bg-gray-900 border-amber-200">
             <CardHeader>
-                <CardTitle className="text-3xl">Hello {name}!</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">Hello {name}!</CardTitle>
                 <CardDescription>Welcome to your profile, view and change your details here</CardDescription>
-                <CardAction className="flex flex-col gap-y-2">
-                    <Button variant={"outline"} >Edit Profile</Button>
-                    <Button variant={"outline"} onClick={() => navigate("/orders")}>View Orders</Button>
-                    <Button variant={"outline"} onClick={onLogout} >Logout</Button>
+            <CardAction className="flex w-full flex-col gap-y-2 sm:w-auto">
+                    <Button className="border-amber-200 dark:border-blue-900 border-2" >Edit Profile</Button>
+                    <Button className="border-amber-200 dark:border-blue-900 border-2" onClick={() => navigate("/orders")}>View Orders</Button>
+                    <Button className="border-amber-200 dark:border-blue-900 border-2" onClick={onLogout} >Logout</Button>
                 </CardAction>
             </CardHeader>
             <CardContent>

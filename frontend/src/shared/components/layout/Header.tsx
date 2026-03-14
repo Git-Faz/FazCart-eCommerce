@@ -1,3 +1,4 @@
+import {useState,useEffect} from "react";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -12,7 +13,7 @@ import lightLogo from "@/assets/FazCartLight.svg";
 import darkLogo from "@/assets/FazCartDark.svg"
 import { ShoppingCartIcon } from "lucide-react";
 import { Link } from "react-router-dom";
-import {type JSX } from "react";
+import { type JSX } from "react";
 import { useTheme } from "@/app/theme/useTheme";
 import { useAuth } from "@/features/auth/useAuth";
 import { Button } from "../ui/button";
@@ -25,11 +26,29 @@ interface NavItem {
     href: string
 }
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(
+    window.matchMedia("(min-width: 768px)").matches
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const listener = () => setIsDesktop(media.matches);
+
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  return isDesktop;
+}
+
 const Header = (): JSX.Element => {
 
     const { theme, toggleTheme } = useTheme();
 
-    const {isLoggedIn} = useAuth();
+    const { isLoggedIn } = useAuth();
+
+    const isDesktop = useIsDesktop()
 
     const navLinks: NavItem[] = [
         {
@@ -44,62 +63,42 @@ const Header = (): JSX.Element => {
         },
     ]
 
-/*     const handleSearch = (query: string) => {
-        const trimmed = query.trim();
-
-        if (!trimmed) {
-            navigate("/products");
-            return;
-        }
-        navigate(`/products?name=${encodeURIComponent(trimmed)}`);
-    };
-
-    const handleSearchFocus = (query: string) => {
-        if (query.length === 0) { 
-            navigate("/products");
-            return;
-        } else {
-            navigate(`/products?name=${encodeURIComponent(query.trim())}`);
-        }
-    } */
-
 
     return (
-        <div className="m-0 w-full">
-            <NavigationMenu viewport={false} className="mx-auto w-full h-fit"  >
-                <NavigationMenuList id="navmenu" className="shadow-blue-200 dark:shadow-blue-500 shadow-sm p-3 min-h-fit" >
-                        <div className="flex flex-row justify-start content-center m-0 min-w-fit w-50 p-4 text-black font-light text-xl">
-                            <img src={theme === "dark" ? lightLogo : darkLogo} alt="logo" className="size-15" />                        
-                            <span className="h-fit my-auto dark:text-white" id="logo">Faz<br></br>Cart</span>
-                        </div>
+        <div className="sticky top-0 z-50 w-full">
+            <NavigationMenu viewport={!isDesktop} className="mx-auto h-fit w-full max-w-none [&>div]:w-full"  >
+                <NavigationMenuList id="navmenu" className="min-h-fit w-full px-2 py-1.5 shadow-sm shadow-amber-200 dark:shadow-blue-500 sm:px-3 sm:py-2" >
+                    <div className="m-0 flex min-w-0 items-center justify-start p-0.5 text-sm font-light text-black sm:p-2 sm:text-xl">
+                        <img src={theme === "dark" ? lightLogo : darkLogo} alt="logo" className="size-8 sm:size-12 md:size-15" />
+                        <span className="my-auto h-fit leading-none dark:text-white" id="logo">Faz<br className="hidden sm:block"></br><span className="sm:hidden">Cart</span><span className="hidden sm:inline">Cart</span></span>
+                    </div>
 
-                    <SearchBar />
+                    <SearchBar className="order-3 lg:w-full md:w-125 sm:w-62.5 basis-full sm:order-0 sm:basis-auto" />
 
-                    <div className="w-fit flex flex-row align-middle items-center ">
-                        <NavigationMenuItem className="flex items-center flex-col hover:bg-background rounded-md p-1 ">
+                    <div className="ml-auto flex w-fit items-center gap-0.5 align-middle sm:ml-0 sm:gap-1">
+                        <NavigationMenuItem className="flex flex-col items-center rounded-md p-0.5 hover:bg-background sm:p-1">
                             <Link to={"/"}
-                                className="flex flex-row gap-x-2 justify-center items-center text-lg px-2 font-semibold content-center">
-                                <HomeIcon size={20} />
+                                className="flex flex-row items-center justify-center gap-x-2 px-1 text-base font-semibold content-center sm:px-2 sm:text-lg">
+                                <HomeIcon size={18} />
                             </Link>
                         </NavigationMenuItem>
-                        <NavigationMenuItem className="flex items-center flex-col hover:bg-background rounded-md p-1 ">
+                        <NavigationMenuItem className="flex flex-col items-center rounded-md p-0.5 hover:bg-background sm:p-1">
                             <Link to={"/cart"}
-                                className="flex flex-row gap-x-2 justify-center items-center text-lg px-2 font-semibold content-center">
-                                <ShoppingCartIcon size={20} />
+                                className="flex flex-row items-center justify-center gap-x-2 px-1 text-base font-semibold content-center sm:px-2 sm:text-lg">
+                                <ShoppingCartIcon size={18} />
                             </Link>
                         </NavigationMenuItem>
+
 
                         <NavigationMenuItem>
-
-                            <NavigationMenuTrigger className="flex items-center dark:hover:bg-background bg-transparent gap-2 z-100 text-lg">
-                                <User2Icon size={20} />
+                            <NavigationMenuTrigger className="z-100 flex items-center gap-2 px-1.5 text-base dark:bg-gray-900 sm:px-2 sm:text-lg">
+                                <User2Icon size={18} />
                             </NavigationMenuTrigger>
-
-                            <NavigationMenuContent className="p-3 flex flex-col gap-2">
+                            <NavigationMenuContent className="p-3 flex flex-col gap-2 dark:bg-gray-900 dark:border-none bg-[#ffffff]/90 min-w-fit">
                                 {
                                     navLinks.map((link) => (
-                                        <NavigationMenuLink asChild key={link.href}>
-                                            <Link to={link.href} className="font-semibold hover:underline">
+                                        <NavigationMenuLink asChild key={link.href} className="dark:hover:bg-blue-950 hover:bg-amber-50 dark:hover:text-blue-300 min-w-fit flex-nowrap">
+                                            <Link to={link.href} className="font-semibold ">
                                                 {link.label}
                                             </Link>
                                         </NavigationMenuLink>
@@ -107,9 +106,10 @@ const Header = (): JSX.Element => {
                                 }
                             </NavigationMenuContent>
                         </NavigationMenuItem>
+
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Button variant={'ghost'} className="text-sm" onClick={toggleTheme}>
+                                <Button variant={'ghost'} className="h-8 px-2 text-sm sm:h-9 sm:px-3" onClick={toggleTheme}>
                                     {theme === "dark" ? <SunIcon></SunIcon> : <MoonIcon />}
                                 </Button>
                             </TooltipTrigger>

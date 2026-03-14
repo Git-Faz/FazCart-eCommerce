@@ -20,7 +20,7 @@ export const LoginForm = (): JSX.Element => {
     const [formData, setFormData] = useState<LoginReq>(initialForm);
     const [errors, setErrors] = useState<FormErrors>({});
 
-    const { isLoading, error, isLoggedIn } = useAuth();
+    const { isLoading, error } = useAuth();
     const dispatch = useAppDispatch()
 
     useEffect(() => {

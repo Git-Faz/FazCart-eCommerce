@@ -47,9 +47,8 @@ const Checkout = (): JSX.Element => {
 
     const handleSubmission = async () => {
         try {
-            const res = await createOrder();
-
-            alert(res.data.message);
+            await createOrder();
+            alert("Order placed successfully");
             navigate("/orders");
         } catch (err) {
             console.error("Order creation failed", err);
@@ -62,11 +61,11 @@ const Checkout = (): JSX.Element => {
 
     return (
         <Body>
-        <div className="m-5 p-5">
+        <div className="m-3 p-3 sm:m-5 sm:p-5">
             <h1 id="title" className="mb-4">Checkout</h1>
 
-            <div className="grid gap-6 md:grid-cols-2 align-top gap-x-24 w-full">
-                <div className="flex flex-col h-100.75 min-h-fit justify-center my-auto gap-y-6 p-4 align-top shadow-md rounded-lg shadow-blue-300 overflow-hidden">
+            <div className="grid w-full items-start gap-4 sm:gap-6 md:grid-cols-2 md:gap-x-8 lg:gap-x-12">
+                <div className="my-auto flex max-h-[60vh] min-h-fit flex-col gap-y-4 overflow-y-auto rounded-lg p-3 shadow-md shadow-blue-300 sm:p-4 md:max-h-[75vh]">
                     {orderItems.map((item: OrderItem, i) => (
                         <CartItemCard
                             key={i}
@@ -82,7 +81,7 @@ const Checkout = (): JSX.Element => {
                     ))}
                 </div>
 
-                <Card className="h-fit shadow-md shadow-blue-300 bg-inherit">
+                <Card className="h-fit bg-inherit shadow-md shadow-blue-300">
                     <CardHeader>
                         <CardTitle>Order Summary</CardTitle>
                     </CardHeader>

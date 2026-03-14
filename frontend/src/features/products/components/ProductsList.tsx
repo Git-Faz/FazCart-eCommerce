@@ -13,7 +13,7 @@ export default function ProductsList(): JSX.Element {
     const [searchParams] = useSearchParams();
     const query = searchParams.get("name")?.trim()?.toLowerCase() ?? "";
     console.log("Query: ", query);
-    
+
     const [page, setPage] = useState(0);
 
     const { isLoggedIn } = useAuth();
@@ -58,25 +58,24 @@ export default function ProductsList(): JSX.Element {
     }
 
     return (
-        <>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4">
-                {products.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        img={{
-                            link: product.imageUrl || placeholder,
-                            alt: "product image",
-                        }}
-                        name={product.name}
-                        price={product.price}
-                        onClick={() => navigate(`/products/${product.id}`)}
-                        onBtnClick={() => handleAddToCart(product.id)}
-                        disabled={isPending}
-                    />
-                ))}
+        <div className="w-full px-2 sm:px-3 md:px-1 lg:px-0">
+            <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-4 sm:gap-y-10 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">                {products.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    img={{
+                        link: product.imageUrl || placeholder,
+                        alt: "product image",
+                    }}
+                    name={product.name}
+                    price={product.price}
+                    onClick={() => navigate(`/products/${product.id}`)}
+                    onBtnClick={() => handleAddToCart(product.id)}
+                    disabled={isPending}
+                />
+            ))}
             </div>
 
-            <div className="flex justify-center gap-4 mt-8">
+            <div className="mt-8 flex justify-center gap-4">
                 <button
                     disabled={page === 0}
                     onClick={() => setPage((prev) => prev - 1)}
@@ -97,6 +96,6 @@ export default function ProductsList(): JSX.Element {
                     Next
                 </button>
             </div>
-        </>
+        </div>
     )
 }

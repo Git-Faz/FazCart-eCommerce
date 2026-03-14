@@ -1,4 +1,4 @@
-import { createContext, type JSX } from "react";
+import { createContext } from "react";
 
 export type Theme = "light" | "dark";
 

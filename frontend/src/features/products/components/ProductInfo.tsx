@@ -1,12 +1,8 @@
-import { useState, type JSX } from "react";
+import { type JSX } from "react";
 import type { ProductInfoProps, QuantityCounterProps } from "../types";
 import {
     Card,
-    CardAction,
     CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
     CardTitle,
 } from "@/shared/components/ui/card"
 import {
@@ -44,40 +40,39 @@ const ProductInfo = ({
     categories,
     price,
     imageUrl,
-    stock,
     quantity,
     onQuantityChange,
     onButtonClick,
 }: ProductInfoProps): JSX.Element => {
 
     return (
-        <Card className="flex flex-row w-full align-top justify-start content-start p-8 ">
-            <div className="w-xl flex align-top justify-start content-start">
-                <img src={imageUrl} alt="product image" className="object-contain min-w-lg w-xl max-w-xl min-h-fit h-fit max-h-175 " />
+        <Card id="productInfoCard" className="flex w-full flex-col items-start dark:border-none dark:bg-gray-900 border-amber-200 justify-start p-4 sm:p-6 lg:flex-row lg:items-start lg:p-8">
+            <div className="flex w-full justify-start lg:w-[45%]">
+                <img src={imageUrl} alt="product image" className="h-auto max-h-105 w-full rounded-md object-contain sm:max-h-130 lg:max-h-175" />
             </div>
 
-            <CardContent className="w-1/2 flex flex-col align-middle justify-start content-center space-y-8 h-full  ">
-                <CardTitle className="text-6xl">{name}</CardTitle>
-                <div><span className="text-4xl">₹{price}</span></div>
+            <CardContent className="h-full w-full space-y-4 px-0 pt-4 sm:space-y-6 lg:w-[55%] lg:px-6 lg:pt-0">
+                <CardTitle className="text-2xl sm:text-4xl lg:text-5xl">{name}</CardTitle>
+                <div><span className="text-2xl sm:text-3xl lg:text-4xl">₹{price}</span></div>
 
                 <div>
-                    <h4 className="text-3xl">Description:</h4>
-                    <p className="text-xl">{description}</p>
+                    <h4 className="text-xl sm:text-2xl lg:text-3xl">Description:</h4>
+                    <p className="text-base sm:text-lg lg:text-xl">{description}</p>
                 </div>
 
                 <div>
-                    <h4 className="text-xl">Categories:</h4><span className="text-md">{categories.join(", ")}</span>
+                    <h4 className="text-lg sm:text-xl">Categories:</h4><span className="text-sm sm:text-base">{categories.join(", ")}</span>
                 </div>
 
-                <div className="space-x-2 flex flex-row align-middle content-center justify-center w-fit">
-                    <span className=" text-center align-middle p-1 text-xl">Quantity:</span> 
+                <div className="flex w-full flex-wrap items-center justify-start gap-2">
+                    <span className="p-1 text-base sm:text-lg lg:text-xl">Quantity:</span>
                     <QuantityCounter
                         max={5}
                         value={quantity}
                         onChange={onQuantityChange}
 
                     />
-                    <Button onClick={onButtonClick} className="bg-blue-500 px-2 font-semibold min-w-fit hover:bg-blue-700">
+                    <Button onClick={onButtonClick} className="min-w-fit bg-blue-500 px-3 font-semibold hover:bg-blue-700 sm:px-4">
                         Add to Cart
                     </Button>
                 </div>

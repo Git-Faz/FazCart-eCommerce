@@ -53,19 +53,19 @@ export default function SearchBar({ onSearch, className }: SearchBarProps): JSX.
   }
 
   return (
-    <div className={cn("flex flex-row w-lg min-w-xs max-w-3xl flex-2 m-1 p-2", className)}>
+    <div className={cn("m-1 flex w-full min-w-0 flex-1 flex-row p-1 sm:max-w-3xl sm:p-2", className)}>
       <Input
         placeholder="Search..."
         value={query}
         onChange={e => setQuery(e.target.value)}
         onFocus={handleExplicitSearch}
         onKeyDown={e => e.key === "Enter" && handleExplicitSearch()}
-        className="bg-neutral-200 dark:bg-inherit border-black dark:border-blue-500 rounded-md rounded-r-none dark:outline-blue-500"
+        className="rounded-r-none border-black bg-neutral-200 dark:border-blue-500 dark:bg-inherit dark:outline-blue-500"
       />
       <Button
         size="icon"
         variant="default"
-        className="border-blue-300 rounded-md rounded-l-none dark:outline-blue-500 dark:bg-blue-500"
+        className="shrink-0 rounded-l-none border-blue-300 dark:bg-blue-500 dark:outline-blue-500"
         onClick={handleExplicitSearch}
       >
         <SearchIcon />

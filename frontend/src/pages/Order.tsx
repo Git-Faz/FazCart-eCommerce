@@ -1,7 +1,6 @@
 import type { JSX } from "react";
 import type { OrderProp } from "@/features/orders/types";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/useAuth";
 import useOrders from "@/features/orders/queries";
 import OrderCard from "@/features/orders/components/OrderCard";
@@ -9,17 +8,17 @@ import Loading from "@/shared/components/ui/myUI/Loading";
 import Body from "@/shared/components/layout/Body";
 import { Button } from "@/shared/components/ui/button";
 import Error from "@/shared/components/ui/myUI/Error";
+import Empty from "@/shared/components/ui/myUI/Empty";
 
 const Order = (): JSX.Element => {
     const { isLoggedIn } = useAuth();
-    const navigate = useNavigate();
     const [page, setPage] = useState(0);
 
     const { data: orders, isLoading, isFetching, isError } = useOrders(page);
 
     const totalPages = orders?.totalPages ?? 0
 
-    if (!isLoggedIn) return (<><h1>Please login to view you Orders </h1></>)
+    if (!isLoggedIn) return <Error errorTitle="LOGIN" errorMsg="To view your ORDERS ..."></Error>
 
     if (isLoading || isFetching) return <Loading message="Loading your Orders..." />;
 
@@ -29,12 +28,12 @@ const Order = (): JSX.Element => {
         )
     }
 
-    if (orders?.content.length === 0) return <h3 className="text-xl font-bold">No orders</h3>;
+    if (orders?.content.length === 0) return <Empty message="No orders yet... Place your first Order"/>;
 
 
     return (
         <Body>
-            <div className="m-5 p-3 flex flex-col h-full space-y-10 w-full">
+            <div className="m-3 flex h-full w-full flex-col space-y-8 p-2 sm:m-5 sm:p-3 sm:space-y-10">
                 <h1 id="title">Your Orders</h1>
                 <div className="flex flex-col">
                     {orders?.content.map((order: OrderProp, index: number) => (
@@ -47,7 +46,7 @@ const Order = (): JSX.Element => {
                         />
                     ))}
                 </div>
-                <div className="flex flex-row justify-start space-x-5 m-5 p-3">
+                <div className="m-2 flex flex-wrap items-center justify-start gap-3 p-1 sm:m-5 sm:p-3">
                     <Button
                         type={"button"} variant={"outline"}
                         onClick={() => setPage((prev) => prev - 1)}
