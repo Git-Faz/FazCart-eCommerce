@@ -2,12 +2,14 @@ import { type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import CartItemCard from "@/features/cart/components/CartItemCard";
 import { Button } from "@/shared/components/ui/button";
-import Loading from "@/shared/components/ui/Loading";
+import Loading from "@/shared/components/ui/myUI/Loading";
 import { useAuth } from "@/features/auth/useAuth";
 import useCart from "@/features/cart/queries";
 import { useDeleteCartItem, useClearCart } from "@/features/cart/mutation"
 import Body from "@/shared/components/layout/Body";
 import { toast } from "sonner";
+import Error from "@/shared/components/ui/myUI/Error";
+import Empty from "@/shared/components/ui/myUI/Empty";
 
 
 const Cart = (): JSX.Element => {
@@ -34,13 +36,13 @@ console.log(cart?.[0]?.productId);
 
     if (cartIsLoading) return <Loading message="Loading Cart..." />
 
-    if (isError) return <h1>Failed to load cart</h1>
+    if (isError) return <Error errorMsg="Could not load cart...Please try again later" />
 
     if (!cart?.length) {
         return (
-            <div>
-                <h1 id="title">Cart Page</h1>
-                <h3>Your cart is empty</h3>
+            <div className="h-dvh w-full">
+                <h1 id="title" className="p-10 text-4xl">My Cart</h1>
+                <Empty message="No items in cart ..."></Empty>
             </div>
         );
     }

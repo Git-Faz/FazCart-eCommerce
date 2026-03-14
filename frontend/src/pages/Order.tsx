@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/useAuth";
 import useOrders from "@/features/orders/queries";
 import OrderCard from "@/features/orders/components/OrderCard";
-import Loading from "@/shared/components/ui/Loading";
+import Loading from "@/shared/components/ui/myUI/Loading";
 import Body from "@/shared/components/layout/Body";
 import { Button } from "@/shared/components/ui/button";
+import Error from "@/shared/components/ui/myUI/Error";
 
 const Order = (): JSX.Element => {
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
     const [page, setPage] = useState(0);
 
-    const { data: orders, isLoading, isFetching, isError: getOrderError } = useOrders(page);
+    const { data: orders, isLoading, isFetching, isError } = useOrders(page);
 
     const totalPages = orders?.totalPages ?? 0
 
@@ -22,13 +23,9 @@ const Order = (): JSX.Element => {
 
     if (isLoading || isFetching) return <Loading message="Loading your Orders..." />;
 
-    if (getOrderError) {
+    if (isError) {
         return (
-            <div className="text-center mt-10">
-                <p className="text-lg font-semibold">
-                    Failed to load orders... Please try again later
-                </p>
-            </div>
+            <Error errorMsg="Could not load orders... Please try again later"/>
         )
     }
 

@@ -4,7 +4,8 @@ import ProductCard from "@/features/products/components/ProductCard"
 import placeholder from "@/assets/placeholder.jpg";
 import { useAddToCart } from "@/features/cart/mutation";
 import { toast } from "sonner";
-import Loading from "@/shared/components/ui/Loading";
+import Loading from "@/shared/components/ui/myUI/Loading";
+import Error from "@/shared/components/ui/myUI/Error";
 import { useAuth } from "@/features/auth/useAuth";
 import { useProducts } from "../queries";
 
@@ -52,11 +53,7 @@ export default function ProductsList(): JSX.Element {
 
     if (isError) {
         return (
-            <div className="text-center mt-10">
-                <p className="text-lg font-semibold">
-                    Failed to load products.
-                </p>
-            </div>
+            <Error errorMsg="Could not load products..." />
         )
     }
 

@@ -2,7 +2,7 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import type { ProductsPage } from "./types";
 import { getAllProducts, getProductByName } from "./api";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 15;
 
 export function useProducts(query: string, page: number) {
   return useQuery<ProductsPage>({

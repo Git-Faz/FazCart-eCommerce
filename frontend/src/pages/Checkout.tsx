@@ -6,7 +6,7 @@ import { type AxiosResponse, AxiosError } from "axios";
 import CartItemCard from "@/features/cart/components/CartItemCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
-import Loading from "@/shared/components/ui/Loading";
+import Loading from "@/shared/components/ui/myUI/Loading";
 import Body from "@/shared/components/layout/Body";
 
 interface OrderItem {

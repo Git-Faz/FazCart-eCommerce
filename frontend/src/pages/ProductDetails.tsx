@@ -6,7 +6,7 @@ import { getProductById } from "@/features/products/api";
 import { addToCart } from "@/features/cart/api";
 import { toast } from "sonner";
 import ProductInfo from "@/features/products/components/ProductInfo";
-import Loading from "@/shared/components/ui/Loading";
+import Loading from "@/shared/components/ui/myUI/Loading";
 import Body from "@/shared/components/layout/Body";
 
 

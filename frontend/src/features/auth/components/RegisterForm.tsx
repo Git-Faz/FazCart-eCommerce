@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import { useEffect, useState } from "react";
 import type { RegisterReq } from "../types";
 import { toast } from "sonner";
-import Loading from "../../../shared/components/ui/Loading";
+import Loading from "../../../shared/components/ui/myUI/Loading";
 import { useAppDispatch } from "@/app/hooks";
 import { useAuth } from "@/features/auth/useAuth";
 import { register } from "@/features/auth/authSlice"

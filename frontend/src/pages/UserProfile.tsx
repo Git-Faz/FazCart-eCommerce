@@ -4,9 +4,10 @@ import { useAuth } from "@/features/auth/useAuth";
 import { useAppDispatch } from "@/app/hooks";
 import UserInfoCard from "@/features/user/components/UserInfoCard";
 import { toast } from "sonner";
-import Loading from "@/shared/components/ui/Loading";
+import Loading from "@/shared/components/ui/myUI/Loading";
 import { logout } from "@/features/auth/authSlice";
 import useUserProfile from "@/features/user/queries";
+import Error from "@/shared/components/ui/myUI/Error";
 
 const UserProfile = (): JSX.Element | null => {
 
@@ -32,7 +33,7 @@ const UserProfile = (): JSX.Element | null => {
 
     if (isLoading || isFetching) return <Loading />
 
-    if (isError) return (<><h1>Error loading your profile</h1></>)
+    if (isError) return (<Error errorMsg="Unable to load your profile... Please try again later" />)
 
     if (!userData) return null;
 

@@ -16,6 +16,24 @@
   font-weight: 400;
   font-display: normal;
 }
+@font-face {
+  font-family: 'gunplay';
+  src: url('../assets/fonts/gunplay\ 3d.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'arcade';
+  src: url('../assets/fonts/ARCADECLASSIC.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'shock';
+  src: url('../assets/fonts/ShockSurgent.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
 
 
 body, main {

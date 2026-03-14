@@ -15,7 +15,7 @@ function Loading({message = "Loading..."}):JSX.Element {
     }
 
     return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] gap-4">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] h-full w-full gap-4">
         <motion.div
             animate="jump"
             transition={{ staggerChildren: -0.2, staggerDirection: -1 }}

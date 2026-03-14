@@ -11,7 +11,6 @@ import type { CartItem } from "../types";
 import { TrashIcon } from "lucide-react";
 import { cn } from "@/shared/utils/utils";
 
-
 const CartItemCard = ({name, price, quantity, imageUrl, total, onClick ,onDelete, classname, serialNo, disabled }: CartItem): JSX.Element => {
     return (
         <Item className={cn(
