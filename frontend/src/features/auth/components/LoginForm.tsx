@@ -67,59 +67,62 @@ export const LoginForm = (): JSX.Element => {
     } */
 
     return (
-        <div>
-            <form
-                onSubmit={handleSubmit}
-                className="authForm"
-            >
-                <h1>Sign in</h1>
-                <div>
-                    <label className="authFormLabel">
-                        Username
-                    </label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        className="authFormInput"
-                    />
-                    {errors.username && (
-                        <p className="mt-1 text-sm text-red-500">{errors.username}</p>
-                    )}
-                </div>
+        <form
+  onSubmit={handleSubmit}
+  className="authForm flex flex-col gap-6"
+>
+  <h1 className="text-2xl font-bold text-center">Sign in</h1>
 
-                <div>
-                    <label className="authFormLabel">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        className="authFormInput"
-                    />
-                    {errors.password && (
-                        <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-                    )}
-                </div>
+  <div className="flex flex-col gap-1">
+    <label className="authFormLabel">
+      Username
+    </label>
 
-                <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full rounded-md bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-500 disabled:opacity-50"
-                >
-                    {isLoading ? (
-                        <>
-                            <Spinner className="mr-2 h-4 w-4" />
-                            Signing in...
-                        </>
-                    ) : (
-                        "Sign in"
-                    )}
-                </Button>
-            </form>
-        </div>
+    <input
+      type="text"
+      name="username"
+      value={formData.username}
+      onChange={handleChange}
+      className="authFormInput"
+    />
+
+    {errors.username && (
+      <p className="text-sm text-red-500">{errors.username}</p>
+    )}
+  </div>
+
+  <div className="flex flex-col gap-1">
+    <label className="authFormLabel">
+      Password
+    </label>
+
+    <input
+      type="password"
+      name="password"
+      value={formData.password}
+      onChange={handleChange}
+      className="authFormInput"
+    />
+
+    {errors.password && (
+      <p className="text-sm text-red-500">{errors.password}</p>
+    )}
+  </div>
+
+  <Button
+    type="submit"
+    disabled={isLoading}
+    className="w-full rounded-md bg-blue-600 py-2 my-2 font-medium text-white transition hover:bg-blue-500 disabled:opacity-50"
+  >
+    {isLoading ? (
+      <>
+        <Spinner className="mr-2 h-4 w-4" />
+        Signing in...
+      </>
+    ) : (
+      "Sign in"
+    )}
+  </Button>
+</form>
     )
 }

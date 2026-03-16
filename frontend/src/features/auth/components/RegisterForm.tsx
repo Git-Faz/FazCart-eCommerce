@@ -68,61 +68,65 @@ export const RegisterForm = (): JSX.Element => {
 
     return (
         <div>
-            <form
-                onSubmit={handleSubmit}
-                className="authForm"
-            >
-                <h1> Register </h1>
+            <form onSubmit={handleSubmit} className="authForm">
+
+                <h1>Register</h1>
+
                 <div>
-                    <div>
-                        <label className="authFormLabel">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="authFormInput"
-                            required
-                        />
-                        {errors.email && (
-                            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                        )}
-                    </div>
+                    <label className="authFormLabel">
+                        Email
+                    </label>
 
-                    <div>
-                        <label className="authFormLabel">
-                            Username
-                        </label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            className="authFormInput"
-                        />
-                        {errors.username && (
-                            <p className="mt-1 text-sm text-red-500">{errors.username}</p>
-                        )}
-                    </div>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="authFormInput"
+                        required
+                    />
 
-                    <div>
-                        <label className="authFormLabel">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="authFormInput"
-                        />
-                        {errors.password && (
-                            <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-                        )}
-                    </div>
+                    {errors.email && (
+                        <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                    )}
                 </div>
+
+                <div>
+                    <label className="authFormLabel">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        className="authFormInput"
+                    />
+
+                    {errors.username && (
+                        <p className="mt-1 text-sm text-red-500">{errors.username}</p>
+                    )}
+                </div>
+
+                <div>
+                    <label className="authFormLabel">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        className="authFormInput"
+                    />
+
+                    {errors.password && (
+                        <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                    )}
+                </div>
+
                 <button
                     type="submit"
                     disabled={isLoading}
@@ -130,6 +134,7 @@ export const RegisterForm = (): JSX.Element => {
                 >
                     {isLoading ? "Signing in..." : "Sign in"}
                 </button>
+
             </form>
         </div>
     )
