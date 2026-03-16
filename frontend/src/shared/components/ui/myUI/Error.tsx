@@ -37,7 +37,7 @@ export default function Error({ errorTitle = "ERROR" ,errorMsg, desClassName }: 
         variants={container}
         initial="initial"
         animate="animate"
-        className="errorTitle mx-auto w-full font-[shock] text-[58px] sm:text-[75px] md:text-[150px] lg:text-[225px] text-center dark:text-blue-500/50 text-amber-300"
+        className="mx-auto w-full font-[shock] text-[58px] sm:text-[70px] md:text-[100px] lg:text-[150px] text-center dark:text-blue-500/50 text-amber-300"
       >
         {text.map((char, index) => (
           <motion.span
@@ -49,7 +49,7 @@ export default function Error({ errorTitle = "ERROR" ,errorMsg, desClassName }: 
           </motion.span>
         ))}
       </motion.h1>
-      <p className={cn("text-center font-bold text-3xl sm:text-4xl md:text-[75px] lg:text-[125px] dark:text-blue-500/50 text-amber-300", desClassName)}>{errorMsg}</p>
+      <p className={cn("text-center font-bold text-2xl sm:text-2xl md:text-[30px] lg:text-[50px] dark:text-blue-500/50 text-amber-300", desClassName)}>{errorMsg}</p>
     </div>
   )
 }
