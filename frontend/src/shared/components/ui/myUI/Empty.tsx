@@ -45,7 +45,7 @@ export default function Empty({message, desClassName}: EmptyStateProps): JSX.Ele
         variants={container}
         initial="initial"
         animate="animate"
-        className="errorTitle mx-auto w-full font-[shock] text-[75px] sm:text-[75px] md:text-[150px] text-center dark:text-blue-500/50 text-amber-300"
+        className="errorTitle mx-auto w-full font-[shock] text-[58px] sm:text-[75px] md:text-[150px] lg:text-[225px] text-center dark:text-blue-500/50 text-amber-300"
       >
         {text.map((char, index) => (
           <motion.span
@@ -57,7 +57,7 @@ export default function Empty({message, desClassName}: EmptyStateProps): JSX.Ele
           </motion.span>
         ))}
       </motion.h1>
-      <p className={cn("text-center font-bold text-4xl dark:text-blue-500/50 text-amber-300", desClassName)}>{message}</p>
+      <p className={cn("text-center font-bold text-3xl sm:text-4xl md:text-[75px] lg:text-[125px] dark:text-blue-500/50 text-amber-300", desClassName)}>{message}</p>
     </div>
   )
 }
