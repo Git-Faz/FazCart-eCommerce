@@ -6,7 +6,7 @@
 /* ---------------- FONTS ---------------- */
 
 @font-face {
-  font-family: "Handmade";
+  font-family: "handmade";
   src: url("../assets/fonts/Handmade.ttf") format("truetype");
   font-weight: 400;
 }
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "gunplay";
-  src: url("../assets/fonts/gunplay 3d.otf") format("opentype");
+  src: url("../assets/fonts/gunplay.otf") format("opentype");
 }
 
 @font-face {
@@ -34,16 +34,19 @@
 
 /* ---------------- GLOBAL ---------------- */
 
-body,
-main {
+body {
   background-color: #f9fafb;
   color: oklch(0.145 0 0);
 }
 
-.dark body,
-.dark main {
+.dark body {
   background-color: #060e21;
   color: #f9fafb;
+}
+
+/* Remove background from main so ShapeGrid shows through */
+main {
+  background-color: transparent;
 }
 
 body {
@@ -87,30 +90,27 @@ img {
 
 /* ---------------- PRODUCT CARD ---------------- */
 
-
-/* shadow handled with normal CSS (safer) */
-
 #productCard {
   box-shadow:
-    0 10px 25px rgba(0,0,0,0.08),
-    0 2px 6px rgba(0,0,0,0.05);
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .dark #productCard .dark #productInfoCard {
   box-shadow:
-    0 10px 25px rgba(0,0,0,0.3),
-    0 2px 6px rgba(0,0,0,0.2);
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 #productCard:hover,
 #productCard:focus {
   transform: translateY(-4px);
-  box-shadow: 0 16px 35px rgba(0,0,0,0.12);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
 }
 
 .dark #productCard:hover,
 .dark #productCard:focus {
-  box-shadow: 0 16px 35px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
 }
 
 /* accent overlay */
@@ -123,14 +123,14 @@ img {
   pointer-events: none;
 
   background:
-    linear-gradient(to top, rgba(168,85,247,0.08), transparent 30%),
-    linear-gradient(to bottom, rgba(59,130,246,0.1), transparent 30%);
+    linear-gradient(to top, rgba(168, 85, 247, 0.08), transparent 30%),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.1), transparent 30%);
 }
 
 .dark #productCard::before {
   background:
-    linear-gradient(to top, rgba(168,85,247,0.15), transparent 30%),
-    linear-gradient(to bottom, rgba(59,130,246,0.15), transparent 30%);
+    linear-gradient(to top, rgba(168, 85, 247, 0.15), transparent 30%),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.15), transparent 30%);
 }
 
 /* ---------------- AUTH FORM ---------------- */
@@ -146,13 +146,13 @@ img {
 
   padding: 2rem;
   border-radius: 0.75rem;
-  
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 
   @apply bg-amber-50/30 dark:bg-gray-800 border-2 border-amber-200/50 dark:border-gray-700;
 }
 
-.authForm > div {
+.authForm>div {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -160,7 +160,7 @@ img {
 
 
 .dark .authForm {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .authFormLabel {
@@ -181,7 +181,7 @@ img {
   background: #374151;
 }
 
-.authForm > h1 {
+.authForm>h1 {
   @apply text-2xl font-semibold text-neutral-600 dark:text-neutral-200 text-center;
 }
 
@@ -227,47 +227,53 @@ img {
   @apply bg-white dark:bg-gray-900;
 
   background-image:
-    radial-gradient(700px circle at top left, rgba(168,85,247,0.08), transparent 65%),
-    radial-gradient(700px circle at top right, rgba(168,85,247,0.08), transparent 65%),
-    radial-gradient(700px circle at bottom right, rgba(59,130,246,0.08), transparent 65%),
-    radial-gradient(700px circle at bottom left, rgba(59,130,246,0.08), transparent 65%);
+    radial-gradient(700px circle at top left, rgba(168, 85, 247, 0.08), transparent 65%),
+    radial-gradient(700px circle at top right, rgba(168, 85, 247, 0.08), transparent 65%),
+    radial-gradient(700px circle at bottom right, rgba(59, 130, 246, 0.08), transparent 65%),
+    radial-gradient(700px circle at bottom left, rgba(59, 130, 246, 0.08), transparent 65%);
 }
 
 .dark #product-details {
   background-image:
-    radial-gradient(700px circle at top left, rgba(168,85,247,0.15), transparent 65%),
-    radial-gradient(700px circle at top right, rgba(168,85,247,0.15), transparent 65%),
-    radial-gradient(700px circle at bottom right, rgba(59,130,246,0.15), transparent 65%),
-    radial-gradient(700px circle at bottom left, rgba(59,130,246,0.15), transparent 65%);
+    radial-gradient(700px circle at top left, rgba(168, 85, 247, 0.15), transparent 65%),
+    radial-gradient(700px circle at top right, rgba(168, 85, 247, 0.15), transparent 65%),
+    radial-gradient(700px circle at bottom right, rgba(59, 130, 246, 0.15), transparent 65%),
+    radial-gradient(700px circle at bottom left, rgba(59, 130, 246, 0.15), transparent 65%);
 }
 
 /* ---------------- SHADOW UTILITIES ---------------- */
 
 .shadow-top {
-  box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .shadow-top-lg {
-  box-shadow: 0 -10px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.1);
 }
 
 .shadow-y {
   box-shadow:
-    0 -4px 6px rgba(0,0,0,0.1),
-    0 4px 6px rgba(0,0,0,0.1);
+    0 -4px 6px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dark .shadow-top {
-  box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .dark .shadow-top-lg {
-  box-shadow: 0 -10px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.4);
 }
 
 .dark .shadow-y {
   box-shadow:
-    0 -4px 6px rgba(0,0,0,0.3),
-    0 4px 6px rgba(0,0,0,0.3);
+    0 -4px 6px rgba(0, 0, 0, 0.3),
+    0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
+.glassyContainer {
+  background-color: rgb(30 58 138 / 0.1);
+  backdrop-filter: blur(6px);
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+}

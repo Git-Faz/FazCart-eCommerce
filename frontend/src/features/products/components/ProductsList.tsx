@@ -58,8 +58,9 @@ export default function ProductsList(): JSX.Element {
     }
 
     return (
-        <div className="w-full px-2 sm:px-3 md:px-1 lg:px-0">
-            <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-4 sm:gap-y-10 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">                {products.map((product) => (
+        <div className="w-full px-2 sm:px-3 md:px-1 lg:px-0 bg-transparent">
+            <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-4 sm:gap-y-10 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">                
+                {products.map((product) => (
                 <ProductCard
                     key={product.id}
                     img={{
