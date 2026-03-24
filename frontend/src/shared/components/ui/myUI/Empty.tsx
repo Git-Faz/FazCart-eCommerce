@@ -45,7 +45,7 @@ export default function Empty({message, desClassName}: EmptyStateProps): JSX.Ele
         variants={container}
         initial="initial"
         animate="animate"
-        className="errorTitle mx-auto w-full font-[shock] text-[58px] sm:text-[70px] md:text-[100px] lg:text-[150px] text-center dark:text-blue-500/50 text-amber-300"
+        className="errorTitle mx-auto w-full font-[retrofloral] text-[58px] sm:text-[70px] md:text-[100px] lg:text-[150px] text-center dark:text-blue-500/50 text-amber-300"
       >
         {text.map((char, index) => (
           <motion.span

@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -27,19 +27,19 @@ interface NavItem {
 }
 
 function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(
-    window.matchMedia("(min-width: 768px)").matches
-  );
+    const [isDesktop, setIsDesktop] = useState(
+        window.matchMedia("(min-width: 768px)").matches
+    );
 
-  useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
-    const listener = () => setIsDesktop(media.matches);
+    useEffect(() => {
+        const media = window.matchMedia("(min-width: 768px)");
+        const listener = () => setIsDesktop(media.matches);
 
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
+        media.addEventListener("change", listener);
+        return () => media.removeEventListener("change", listener);
+    }, []);
 
-  return isDesktop;
+    return isDesktop;
 }
 
 const Header = (): JSX.Element => {
@@ -63,9 +63,27 @@ const Header = (): JSX.Element => {
         },
     ]
 
+    const categories: NavItem[] = [
+        {
+            label: "Foods", href: "#"
+        },
+        {
+            label: "Clothing", href: "#"
+        },
+        {
+            label: "Softwares", href: "#"
+        },
+        {
+            label: "Electronics", href: "#"
+        },
+        {
+            label: "Kitchenware", href: "#"
+        }
+    ]
+
 
     return (
-        <div className="sticky top-0 z-50 w-full">
+        <div className="sticky top-0 z-50 w-full min-h-fit">
             <NavigationMenu viewport={!isDesktop} className="mx-auto h-fit w-full max-w-none [&>div]:w-full"  >
                 <NavigationMenuList id="navmenu" className="min-h-fit w-full px-2 py-1.5 shadow-sm shadow-amber-200 dark:shadow-blue-500 sm:px-3 sm:py-2" >
                     <div className="m-0 flex min-w-0 items-center justify-start p-0.5 text-sm font-light text-black sm:p-2 sm:text-xl">
@@ -120,8 +138,10 @@ const Header = (): JSX.Element => {
                     </div>
                 </NavigationMenuList>
             </NavigationMenu>
+            
         </div>
     )
 }
 
 export { Header };
+

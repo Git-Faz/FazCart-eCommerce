@@ -23,8 +23,8 @@
 }
 
 @font-face {
-  font-family: "arcade";
-  src: url("../assets/fonts/ARCADECLASSIC.TTF") format("truetype");
+  font-family: "retrofloral";
+  src: url("../assets/fonts/RetroFloral.ttf") format("truetype");
 }
 
 @font-face {
@@ -32,7 +32,6 @@
   src: url("../assets/fonts/ShockSurgent.otf") format("opentype");
 }
 
-/* ---------------- GLOBAL ---------------- */
 
 body {
   background-color: #f9fafb;
@@ -68,7 +67,7 @@ body {
   min-height: 75px;
   backdrop-filter: blur(12px);
 
-  @apply bg-white/90 dark:bg-gray-900/90 border-b border-gray-200 dark:border-gray-700;
+  @apply bg-white/90 dark:bg-[#000614]/70 border-b border-gray-200 dark:border-gray-700;
 }
 
 #logo {

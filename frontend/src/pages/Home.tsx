@@ -36,13 +36,13 @@ export default function Home(): JSX.Element {
             </div>
 
             <div className="relative z-10 h-screen">
-                <div className="glassyContainer flex flex-row justify-center items-center p-4 sm:p-6 md:p-8 lg:p-10 border min-h-fit h-auto sm:h-1/2 mt-10 sm:mt-16 md:mt-20 mx-2 sm:mx-6 md:mx-0">
+                <div className="glassyContainer flex flex-row justify-center items-center p-4 sm:p-6 md:p-8 lg:p-10 border min-h-fit h-1/2 m:h-2/3 lg:h-100 sm:h-1/2 mt-5 sm:mt-5 lg:mt-5 md:mt-5 mx-1 sm:mx-6 md:mx-0 lg:mx-0">
                     <div className="flex flex-col mt-0 items-center justify-center text-center h-full w-full px-2 sm:px-4">
-                        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-800 dark:text-white/80 tracking-wide mt-3 sm:mt-5">
+                        <h1 className="text-6xl font-[retrofloral] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-800 dark:text-white/80 tracking-wide mt-3 sm:mt-5">
                             FazCart
                         </h1>
 
-                        <p className="text-gray-700 dark:text-white/80 mt-2 sm:mt-3 text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide px-4">
+                        <p className="text-gray-700 font-[retrofloral] dark:text-white/80 mt-2 sm:mt-3 text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide px-4">
                             Fast. Affordable. Reliable.
                         </p>
 
@@ -50,6 +50,8 @@ export default function Home(): JSX.Element {
                             <Link to={"/products"}>Explore</Link>
                         </Button>
                     </div>
+
+
                 </div>
             </div>
         </Body>

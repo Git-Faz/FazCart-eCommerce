@@ -25,7 +25,7 @@ function Loading({message = "Loading..."}):JSX.Element {
             <motion.div className="w-5 h-5 rounded-full dark:bg-purple-500 bg-blue-500" variants={dotVariants} />
             <motion.div className="w-5 h-5 rounded-full dark:bg-purple-500 bg-blue-500" variants={dotVariants} />
         </motion.div>
-        <p className="text-2xl md:text-3xl lg:text-4xl text-black dark:text-purple-300 ">{message}</p>
+        <p className="text-2xl md:text-3xl lg:text-4xl text-black dark:text-purple-300 font-[retrofloral] ">{message}</p>
         </div>
     )
 }
