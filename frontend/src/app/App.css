@@ -6,280 +6,364 @@
 /* ---------------- FONTS ---------------- */
 
 @font-face {
-  font-family: "handmade";
-  src: url("../assets/fonts/Handmade.ttf") format("truetype");
-  font-weight: 400;
+    font-family: "handmade";
+    src: url("../assets/fonts/Handmade.ttf") format("truetype");
+    font-weight: 400;
 }
 
 @font-face {
-  font-family: "RushDriver";
-  src: url("../assets/fonts/RushDriver-Italic.ttf") format("truetype");
-  font-style: italic;
+    font-family: "RushDriver";
+    src: url("../assets/fonts/RushDriver-Italic.ttf") format("truetype");
+    font-style: italic;
 }
 
 @font-face {
-  font-family: "gunplay";
-  src: url("../assets/fonts/gunplay.otf") format("opentype");
+    font-family: "gunplay";
+    src: url("../assets/fonts/gunplay.otf") format("opentype");
 }
 
 @font-face {
-  font-family: "retrofloral";
-  src: url("../assets/fonts/RetroFloral.ttf") format("truetype");
+    font-family: "retrofloral";
+    src: url("../assets/fonts/RetroFloral.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "shock";
-  src: url("../assets/fonts/ShockSurgent.otf") format("opentype");
+    font-family: "shock";
+    src: url("../assets/fonts/ShockSurgent.otf") format("opentype");
 }
-
 
 body {
-  background-color: #f9fafb;
-  color: oklch(0.145 0 0);
+    background-color: #f9fafb;
+    color: oklch(0.145 0 0);
 }
 
 .dark body {
-  background-color: #060e21;
-  color: #f9fafb;
+    background-color: #060e21;
+    color: #f9fafb;
 }
 
 /* Remove background from main so ShapeGrid shows through */
 main {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 body {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-/* ---------------- NAV ---------------- */
+/* ---------------- Header ---------------- */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  min-height: fit-content;
+  height: fit-content;
+  backdrop-filter: blur(7px);
+
+  /* dark:bg-[#000614]/70 */
+  background-color: rgba(254, 243, 199, 0.7);
+
+  /* blue-300 shadow (Tailwind ≈ #93c5fd) */
+  box-shadow: 0 4px 10px rgba(252, 211, 77, 0.25);
+}
+
+.dark .header{
+    background-color: rgba(0, 6, 20, 0.7);
+    box-shadow: 0 4px 10px rgba(147, 197, 253, 0.25);
+}
 
 #navmenu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  z-index: 100;
-  min-height: 75px;
-  backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 100;
+    min-height: fit-content;
+    height: 70px;
 
-  @apply bg-white/90 dark:bg-[#000614]/70 border-b border-gray-200 dark:border-gray-700;
+    @apply bg-white/90 dark:bg-[#000614]/70;
+}
+
+.nav-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px; /* match your UI */
+  
+}
+
+/* the sliding highlight layer */
+.nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(30 58 138 / 0.15); /* blue-300 @ 50% */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.15s ease;
+  z-index: 0;
+}
+
+/* trigger states */
+.nav-item:hover::before,
+.nav-item:focus::before,
+.nav-item:active::before {
+  transform: scaleX(1);
+}
+
+.nav-item:active::after{
+    color: black;
+}
+
+/* keep text above highlight */
+.nav-item > * {
+  position: relative;
+  z-index: 1;
 }
 
 #logo {
-  font-family: shock, "Times New Roman";
+    font-family: shock, "Times New Roman";
 }
 
 /* ---------------- TITLE ---------------- */
 
 #title {
-  @apply m-1 p-2 text-4xl font-bold text-blue-600 dark:text-blue-400;
+    @apply m-1 p-2 text-4xl font-bold text-blue-600 dark:text-blue-400;
 }
 
 /* ---------------- BUTTON + IMG ---------------- */
 
 button,
 img {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* ---------------- PRODUCT CARD ---------------- */
 
 #productCard {
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.08),
-    0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .dark #productCard .dark #productInfoCard {
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.3),
-    0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 #productCard:hover,
 #productCard:focus {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
 }
 
 .dark #productCard:hover,
 .dark #productCard:focus {
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
 }
 
 /* accent overlay */
 
 #productCard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
 
-  background:
-    linear-gradient(to top, rgba(168, 85, 247, 0.08), transparent 30%),
-    linear-gradient(to bottom, rgba(59, 130, 246, 0.1), transparent 30%);
+    background:
+        linear-gradient(to top, rgba(168, 85, 247, 0.08), transparent 30%),
+        linear-gradient(to bottom, rgba(59, 130, 246, 0.1), transparent 30%);
 }
 
 .dark #productCard::before {
-  background:
-    linear-gradient(to top, rgba(168, 85, 247, 0.15), transparent 30%),
-    linear-gradient(to bottom, rgba(59, 130, 246, 0.15), transparent 30%);
+    background:
+        linear-gradient(to top, rgba(168, 85, 247, 0.15), transparent 30%),
+        linear-gradient(to bottom, rgba(59, 130, 246, 0.15), transparent 30%);
 }
 
 /* ---------------- AUTH FORM ---------------- */
 
 .authForm {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  gap: 1.5rem;
+    gap: 1.5rem;
 
-  width: 100%;
-  max-width: 36rem;
+    width: 100%;
+    max-width: 36rem;
 
-  padding: 2rem;
-  border-radius: 0.75rem;
+    padding: 2rem;
+    border-radius: 0.75rem;
 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 
-  @apply bg-amber-50/30 dark:bg-gray-800 border-2 border-amber-200/50 dark:border-gray-700;
+    @apply bg-amber-50/30 dark:bg-gray-800 border-2 border-amber-200/50 dark:border-gray-700;
 }
 
-.authForm>div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.authForm > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
-
 
 .dark .authForm {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .authFormLabel {
-  @apply block text-sm text-neutral-800 dark:text-neutral-300 mb-1;
+    @apply block text-sm text-neutral-800 dark:text-neutral-300 mb-1;
 }
 
 .authFormInput {
-  @apply w-full rounded-md px-2 py-1 text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200 dark:border-gray-600;
+    @apply w-full rounded-md px-2 py-1 text-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200 dark:border-gray-600;
 
-  height: 3rem;
+    height: 3rem;
 }
 
 .authFormInput {
-  background: white;
+    background: white;
 }
 
 .dark .authFormInput {
-  background: #374151;
+    background: #374151;
 }
 
-.authForm>h1 {
-  @apply text-2xl font-semibold text-neutral-600 dark:text-neutral-200 text-center;
+.authForm > h1 {
+    @apply text-2xl font-semibold text-neutral-600 dark:text-neutral-200 text-center;
 }
 
 /* ---------------- LOADING ---------------- */
 
 .loading {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  flex: 1;
-  min-height: calc(100vh - 200px);
+    flex: 1;
+    min-height: calc(100vh - 200px);
 }
 
 /* ---------------- NAV RESPONSIVE ---------------- */
 
 @media (max-width: 1024px) {
-
-  #navmenu {
-    flex-wrap: wrap;
-    row-gap: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
+    #navmenu {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
 }
 
 @media (max-width: 640px) {
-
-  #navmenu {
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
+    #navmenu {
+        justify-content: center;
+        gap: 0.5rem;
+    }
 }
 
 /* ---------------- PRODUCT DETAILS BG ---------------- */
 
 #product-details {
-  width: 100%;
+    width: 100%;
 
-  @apply bg-white dark:bg-gray-900;
+    @apply bg-white dark:bg-gray-900;
 
-  background-image:
-    radial-gradient(700px circle at top left, rgba(168, 85, 247, 0.08), transparent 65%),
-    radial-gradient(700px circle at top right, rgba(168, 85, 247, 0.08), transparent 65%),
-    radial-gradient(700px circle at bottom right, rgba(59, 130, 246, 0.08), transparent 65%),
-    radial-gradient(700px circle at bottom left, rgba(59, 130, 246, 0.08), transparent 65%);
+    background-image:
+        radial-gradient(
+            700px circle at top left,
+            rgba(168, 85, 247, 0.08),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px circle at top right,
+            rgba(168, 85, 247, 0.08),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px circle at bottom right,
+            rgba(59, 130, 246, 0.08),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px circle at bottom left,
+            rgba(59, 130, 246, 0.08),
+            transparent 65%
+        );
 }
 
 .dark #product-details {
-  background-image:
-    radial-gradient(700px circle at top left, rgba(168, 85, 247, 0.15), transparent 65%),
-    radial-gradient(700px circle at top right, rgba(168, 85, 247, 0.15), transparent 65%),
-    radial-gradient(700px circle at bottom right, rgba(59, 130, 246, 0.15), transparent 65%),
-    radial-gradient(700px circle at bottom left, rgba(59, 130, 246, 0.15), transparent 65%);
+    background-image:
+        radial-gradient(
+            700px circle at top left,
+            rgba(168, 85, 247, 0.15),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px circle at top right,
+            rgba(168, 85, 247, 0.15),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px circle at bottom right,
+            rgba(59, 130, 246, 0.15),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px circle at bottom left,
+            rgba(59, 130, 246, 0.15),
+            transparent 65%
+        );
 }
 
 /* ---------------- SHADOW UTILITIES ---------------- */
 
 .shadow-top {
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .shadow-top-lg {
-  box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.1);
 }
 
 .shadow-y {
-  box-shadow:
-    0 -4px 6px rgba(0, 0, 0, 0.1),
-    0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow:
+        0 -4px 6px rgba(0, 0, 0, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dark .shadow-top {
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .dark .shadow-top-lg {
-  box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -10px 15px rgba(0, 0, 0, 0.4);
 }
 
 .dark .shadow-y {
-  box-shadow:
-    0 -4px 6px rgba(0, 0, 0, 0.3),
-    0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow:
+        0 -4px 6px rgba(0, 0, 0, 0.3),
+        0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .glassyContainer {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  border: 1px solid rgb(245 158 11 / 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    border: 1px solid rgb(245 158 11 / 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 .dark .glassyContainer {
-  background-color: rgb(30 58 138 / 0.1);
-  border-color: rgb(255 255 255 / 0.1);
-  backdrop-filter: blur(5px);
+    background-color: rgb(30 58 138 / 0.1);
+    border-color: rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(5px);
 }
