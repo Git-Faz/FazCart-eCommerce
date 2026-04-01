@@ -22,7 +22,8 @@ public class ProductService {
 
     private final ProductRepo productRepo;
 
-    public Page<Product> getAllProducts(Pageable pageable) {
+    public Page<Product> getAllProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return productRepo.findAll(pageable);
     }
 
@@ -70,9 +71,9 @@ public class ProductService {
         productRepo.delete(p);
     }
 
-    public Page<Product> getProductByCategory(Set<String> categories, int page, int size) {
+    public Page<Product> getProductsByCategory(String category, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return productRepo.findByCategoriesIn(categories, pageable);
+        return productRepo.findByCategory(category, pageable);
     }
 
     public Product getProductById(Long id) {
