@@ -1,19 +1,33 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import type { ProductsPage } from "./types";
-import { getAllProducts, getProductByName } from "./api";
+import { getProducts, getProductByName } from "./api";
 
 const PAGE_SIZE = 15;
 
-export function useProducts(query: string, page: number) {
-  return useQuery<ProductsPage>({
-    queryKey: ["products", query, page],
-    queryFn: async () => {
-      const response =
-        query
-          ? await getProductByName(query, page, PAGE_SIZE)
-          : await getAllProducts(page, PAGE_SIZE);
+type UseProductsParams = { query?: string; category?: string; page: number };
 
-      return response.data;
+export function useProducts({ query, category, page }: UseProductsParams) {
+  return useQuery<ProductsPage>({
+    queryKey: ["products", { query: query || null, category: category || null, page }],
+    queryFn: async () => {
+      if (query) {
+        const res = await getProductByName(query, page, PAGE_SIZE);
+        return res.data;
+      }
+      if (category) {
+        const res = await getProducts({
+          category,
+          page,
+          size: PAGE_SIZE,
+        });
+        return res.data;
+      }    
+      const res = await getProducts({
+        page,
+        size: PAGE_SIZE,
+      });
+    
+      return res.data;
     },
     placeholderData: keepPreviousData,
   });
