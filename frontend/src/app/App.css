@@ -82,12 +82,12 @@ body {
 
 #navmenu {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
     z-index: 100;
     min-height: fit-content;
-    height: 70px;
+    height: fit-content;
 
     @apply bg-white/90 dark:bg-[#000614]/70;
 }
@@ -269,6 +269,14 @@ img {
         justify-content: center;
         gap: 0.5rem;
     }
+}
+
+@media (min-width: 768px) {
+  #navmenu {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 /* ---------------- PRODUCT DETAILS BG ---------------- */
