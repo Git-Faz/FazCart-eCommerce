@@ -1,59 +1,135 @@
 import Body from "@/shared/components/layout/Body";
 import type { JSX } from "react";
 import { useTheme } from "@/app/theme/useTheme";
+import { useProducts } from "@/features/products/queries";
 import FloatingLines from "@/components/FloatingLines";
 import ShapeGrid from "@/components/ShapeGrid";
 import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router-dom";
+import { type CategoryCardProps } from "@/shared/types";
+import { cn } from "@/shared/utils/utils";
+
+import electronics from "@/assets/images/electronicCat.avif"
+import food from "@/assets/images/food.png"
+import clothing from "@/assets/images/clothing.png"
+import software from"@/assets/images/software.png"
+
+import ProductsList from "@/features/products/components/ProductsList";
 
 export default function Home(): JSX.Element {
-    const { theme } = useTheme();
+  
+  const { theme } = useTheme();
+  
+  
+  const categories = [
+    { title: "Electronics", image: electronics },
+    { title: "Food", image: food },
+    { title: "Clothing", image: clothing },
+    { title: "Software", image: software },
+  ];
 
-    return (
-        <Body classname="relative mx-auto min-h-screen min-w-screen w-full max-w-7xl">
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                {theme === "dark" ? (
-                    <FloatingLines
-                        enabledWaves={["top", "bottom", "middle"]}
-                        lineCount={5}
-                        lineDistance={25.5}
-                        bendRadius={5}
-                        bendStrength={-0.5}
-                        interactive={false}
-                        parallax={false}
-                    />
-                ) : (
-                    <ShapeGrid
-                        speed={0.5}
-                        squareSize={85}
-                        direction="diagonal"
-                        borderColor="#ffedb3"
-                        hoverFillColor="transparent"
-                        shape="square"
-                        hoverTrailAmount={0}
-                    />
-                )}
+
+  return (
+    <Body className="relative min-h-screen w-full px-3 sm:px-4 md:px-6 lg:px-8 py-5 lg:py-5">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {theme === "dark" ? (
+          <FloatingLines
+            enabledWaves={["top", "bottom", "middle"]}
+            lineCount={5}
+            lineDistance={25.5}
+            bendRadius={5}
+            bendStrength={-0.5}
+            interactive={false}
+            parallax={false}
+          />
+        ) : (
+          <ShapeGrid
+            speed={0.5}
+            squareSize={85}
+            direction="diagonal"
+            borderColor="#ffedb3"
+            hoverFillColor="transparent"
+            shape="square"
+            hoverTrailAmount={0}
+          />
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Hero */}
+        <section className="mt-5 lg:mt-0">
+          <div className="glassyContainer w-full p-4 sm:p-6 md:p-8 lg:p-10 min-h-[50vh] flex items-center justify-center">
+            <div className="flex flex-col items-center text-center w-full">
+              <h1
+                className="font-[retrofloral] font-bold tracking-wide
+                text-gray-800 dark:text-white/80
+                text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+              >
+                FazCart
+              </h1>
+
+              <p
+                className="font-[retrofloral] tracking-wide mt-3 px-2 sm:px-4
+                text-gray-700 dark:text-white/80
+                text-lg sm:text-xl md:text-2xl lg:text-3xl"
+              >
+                Fast. Affordable. Reliable.
+              </p>
+
+              <Button
+                variant="secondary"
+                className="mt-8 h-12 sm:h-14 w-28 sm:w-32 rounded-4xl
+                  bg-amber-400/70 hover:bg-amber-400
+                  dark:bg-black/70 dark:hover:bg-black
+                  text-white font-bold tracking-wide"
+              >
+                <Link to="/products" className="text-md lg:text-lg md:text-lg sm:text-md">Explore</Link>
+              </Button>
             </div>
+          </div>
+        </section>
 
-            <div className="relative z-10 h-screen">
-                <div className="glassyContainer flex flex-row justify-center items-center p-4 sm:p-6 md:p-8 lg:p-10 border min-h-fit h-1/2 m:h-2/3 lg:h-115 sm:h-1/2 mt-5 sm:mt-5 lg:mt-0 md:mt-5 mx-1 sm:mx-6 md:mx-0 lg:mx-0">
-                    <div className="flex flex-col mt-0 items-center justify-center text-center h-full w-full px-2 sm:px-4">
-                        <h1 className="text-6xl font-[retrofloral] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-gray-800 dark:text-white/80 tracking-wide mt-3 sm:mt-5">
-                            FazCart
-                        </h1>
+        {/* categories UI */}
+        <section className="mt-10 lg:mt-10">
+          <div className="glassyContainer w-full p-2 h-fit lg:p-3 md:p-3 backdrop-blur-lg!">
+            <h2 className="font-[retrofloral] text-center mb-0
+              text-lg sm:text-xl md:text-2xl lg:text-3xl">
+              Shop by Category
+            </h2>
+          </div>
+            <div className="grid grid-cols-2 my-5 md:grid-cols-4 gap-3 sm:gap-4">
+              {categories.map((cat) => (
+                <CategoryCard
+                  key={cat.title}
+                  title={cat.title}
+                  image={{ link: cat.image, alt: cat.title }}
+                  className="glassyContainer backdrop-blur-lg!"
+                />
+              ))}
+            </div>        
+        </section>
+        {/*Featured section */}
+        <section className="mt-10 lg:mt-10">
+          <div className="glassyContainer w-full mb-3 p-2 h-fit lg:p-3 md:p-3 backdrop-blur-lg!">
+            <h2 className="font-[retrofloral] text-center mb-0
+              text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                Featured Products
+            </h2>
+          </div>
+          <ProductsList category="featured" size={5} hidePagination className="glassyContainer py-6 backdrop-blur-md!" />
+        </section>
+      </div>
+    </Body>
+  );
+}
 
-                        <p className="text-gray-700 font-[retrofloral] dark:text-white/80 mt-2 sm:mt-3 text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide px-4">
-                            Fast. Affordable. Reliable.
-                        </p>
-
-                        <Button variant={"secondary"} className="rounded-4xl bg-amber-400/70 hover:bg-amber-400 dark:bg-black/70 dark:hover:bg-black text-white font-bold text-base sm:text-lg tracking-wide p-3 h-12 sm:h-15 min-w-fit w-28 sm:w-30 my-6 sm:my-8 md:my-10 mx-auto">
-                            <Link to={"/products"}>Explore</Link>
-                        </Button>
-                    </div>
-
-
-                </div>
-            </div>
-        </Body>
-    );
+function CategoryCard({ image, title, className }: CategoryCardProps): JSX.Element {
+  return (
+    <div className={cn("flex flex-col px-3 py-2",className)}>
+      <img src={image.link} alt={image.alt} loading="lazy" className="w-full object-contain h-28 sm:h-34 lg:h-48 m-0 rounded-xl border-transparent" />
+      <h4 className="font-[retrofloral] text-lg lg:text-2xl md:text-xl text-center">{ title }</h4>
+    </div>
+  )
 }
