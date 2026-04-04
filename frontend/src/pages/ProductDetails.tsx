@@ -54,7 +54,7 @@ const ProductDetails = (): JSX.Element => {
     }
 
     return (
-        <Body classname="mx-auto w-full px-4 sm:px-6 lg:px-10">
+        <Body className="mx-auto w-full px-4 sm:px-6 lg:px-10">
         <div className="flex p-2 sm:p-4 lg:p-10">
             <ProductInfo
                 name={productDetails.name}

@@ -48,7 +48,7 @@ console.log(cart?.[0]?.productId);
     const handleCheckout = () => navigate('/checkout')
 
     return (
-        <Body classname="mx-auto w-full max-w-4xl px-4 py-5 sm:px-6">
+        <Body className="mx-auto w-full max-w-4xl px-4 py-5 sm:px-6">
                 <h1 id="title" >My Cart</h1>
                 <div>
                     {
