@@ -2,13 +2,14 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import type { ProductsPage } from "./types";
 import { getProducts, getProductByName } from "./api";
 
-const PAGE_SIZE = 15;
+;
 
-type UseProductsParams = { query?: string; category?: string; page: number };
+type UseProductsParams = { query?: string; category?: string; page: number; size?:number };
 
-export function useProducts({ query, category, page }: UseProductsParams) {
+export function useProducts({ query, category, page, size }: UseProductsParams) {
+  const PAGE_SIZE = size ?? 15
   return useQuery<ProductsPage>({
-    queryKey: ["products", { query: query || null, category: category || null, page }],
+    queryKey: ["products", { query: query || null, category: category || null, page, PAGE_SIZE }],
     queryFn: async () => {
       if (query) {
         const res = await getProductByName(query, page, PAGE_SIZE);

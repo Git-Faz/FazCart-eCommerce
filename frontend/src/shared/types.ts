@@ -5,3 +5,12 @@ export interface Page<T> {
   number: number;
   size: number;
 }
+
+export interface CategoryCardProps{
+  image: {
+      link: string,
+      alt: string
+  },
+  title: string
+  className?: string
+}

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger }
   from "@/shared/components/ui/navigation-menu";
 import { HomeIcon, MoonIcon, SunIcon, User2Icon, MenuIcon, } from "lucide-react";
-import lightLogo from "@/assets/FazCartLight.svg";
-import darkLogo from "@/assets/FazCartDark.svg";
+import lightLogo from "@/assets/svg/FazCartLight.svg";
+import darkLogo from "@/assets/svg/FazCartDark.svg";
 import { ShoppingCartIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { type JSX } from "react";
@@ -11,29 +11,15 @@ import { useTheme } from "@/app/theme/useTheme";
 import { useAuth } from "@/features/auth/useAuth";
 import { Button } from "../ui/button";
 import SearchBar from "./SearchBar";
+import useIsDesktop from "@/app/hooks";
 
 interface NavItem {
   label: string;
   href: string;
 }
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(
-    window.matchMedia("(min-width: 768px)").matches,
-  );
-
-  useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
-    const listener = () => setIsDesktop(media.matches);
-
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
-
-  return isDesktop;
-}
-
 const Header = (): JSX.Element => {
+  
   const { theme, toggleTheme } = useTheme();
   const { isLoggedIn } = useAuth();
   const isDesktop = useIsDesktop();

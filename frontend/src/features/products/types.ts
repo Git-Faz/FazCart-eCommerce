@@ -39,6 +39,14 @@ export interface Product {
     imageUrl: string;
 }
 
+export interface ProductsListProps {
+  query?: string;
+  category?: string;
+  hidePagination?: boolean;
+  size?: number;
+  className?: string
+}
+
 export interface ProductsPage {
   content: Product[];
   totalPages: number;
