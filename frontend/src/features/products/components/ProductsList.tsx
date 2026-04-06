@@ -73,7 +73,7 @@ export default function ProductsList({ query: propQuery, category: propCategory,
 
   return (
     <div className={cn("w-full px-2 sm:px-3 md:px-1 lg:px-0 bg-transparent", className)}>
-      <div className= "grid grid-cols-2 gap-5 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,220px))] md:justify-center">
+      <div className= "grid grid-cols-2 overflow-x-scroll gap-5 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,220px))] md:justify-center">
         {products.map((product) => (
           <ProductCard
             key={product.id}
