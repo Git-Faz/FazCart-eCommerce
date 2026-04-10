@@ -1,33 +1,32 @@
 import Body from "@/shared/components/layout/Body";
 import type { JSX } from "react";
 import { useTheme } from "@/app/theme/useTheme";
-import { useProducts } from "@/features/products/queries";
+import useIsDesktop from "@/app/hooks";
 import FloatingLines from "@/components/FloatingLines";
 import ShapeGrid from "@/components/ShapeGrid";
 import { Button } from "@/shared/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { type CategoryCardProps } from "@/shared/types";
 import { cn } from "@/shared/utils/utils";
-
-import electronics from "@/assets/images/electronicCat.avif"
-import food from "@/assets/images/food.png"
-import clothing from "@/assets/images/clothing.png"
-import software from"@/assets/images/software.png"
-
+import electronics from "@/assets/images/electronicCat.avif";
+import food from "@/assets/images/food.png";
+import clothing from "@/assets/images/clothing.png";
+import software from "@/assets/images/software.png";
 import ProductsList from "@/features/products/components/ProductsList";
 
 export default function Home(): JSX.Element {
-  
   const { theme } = useTheme();
-  
-  
-  const categories = [
-    { title: "Electronics", image: electronics },
-    { title: "Food", image: food },
-    { title: "Clothing", image: clothing },
-    { title: "Software", image: software },
-  ];
+  const isDesktop = useIsDesktop();
+  const navigate = useNavigate();
 
+  const featuredSize: number = isDesktop ? 5 : 6;
+  const p: string = "/products?category=";
+  const categories = [
+    { title: "Electronics", link: `${p}electronics`, image: electronics },
+    { title: "Food", link: `${p}food`, image: food },
+    { title: "Clothing", link: `${p}clothing`, image: clothing },
+    { title: "Software", link: `${p}software`, image: software },
+  ];
 
   return (
     <Body className="relative min-h-screen w-full px-3 sm:px-4 md:px-6 lg:px-8 py-5 lg:py-5">
@@ -85,7 +84,12 @@ export default function Home(): JSX.Element {
                   dark:bg-black/70 dark:hover:bg-black
                   text-white font-bold tracking-wide"
               >
-                <Link to="/products" className="text-md lg:text-lg md:text-lg sm:text-md">Explore</Link>
+                <Link
+                  to="/products"
+                  className="text-md lg:text-lg md:text-lg sm:text-md"
+                >
+                  Explore
+                </Link>
               </Button>
             </div>
           </div>
@@ -94,42 +98,64 @@ export default function Home(): JSX.Element {
         {/* categories UI */}
         <section className="mt-10 lg:mt-10">
           <div className="glassyContainer w-full p-2 h-fit lg:p-3 md:p-3 backdrop-blur-lg!">
-            <h2 className="font-[retrofloral] text-center mb-0
-              text-lg sm:text-xl md:text-2xl lg:text-3xl">
+            <h2
+              className="font-[retrofloral] text-center mb-0
+              text-lg sm:text-xl md:text-2xl lg:text-3xl"
+            >
               Shop by Category
             </h2>
           </div>
-            <div className="grid grid-cols-2 my-5 md:grid-cols-4 gap-3 sm:gap-4">
-              {categories.map((cat) => (
-                <CategoryCard
-                  key={cat.title}
-                  title={cat.title}
-                  image={{ link: cat.image, alt: cat.title }}
-                  className="glassyContainer backdrop-blur-lg!"
-                />
-              ))}
-            </div>        
+          <div className="grid grid-cols-2 my-5 md:grid-cols-4 gap-3 sm:gap-4">
+            {categories.map((cat) => (
+              <CategoryCard
+                key={cat.title}
+                title={cat.title}
+                image={{ link: cat.image, alt: cat.title }}
+                onClick={() => navigate(cat.link)}
+                className="glassyContainer backdrop-blur-lg!"
+              />
+            ))}
+          </div>
         </section>
         {/*Featured section */}
         <section className="mt-10 lg:mt-10">
           <div className="glassyContainer w-full mb-3 p-2 h-fit lg:p-3 md:p-3 backdrop-blur-lg!">
-            <h2 className="font-[retrofloral] text-center mb-0
-              text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                Featured Products
+            <h2
+              className="font-[retrofloral] text-center mb-0
+              text-lg sm:text-xl md:text-2xl lg:text-3xl"
+            >
+              Featured Products
             </h2>
           </div>
-          <ProductsList category="featured" size={5} hidePagination className="glassyContainer py-6 backdrop-blur-md!" />
+          <ProductsList
+            category="featured"
+            size={featuredSize}
+            hidePagination
+            className="glassyContainer py-6 backdrop-blur-md!"
+          />
         </section>
       </div>
     </Body>
   );
 }
 
-function CategoryCard({ image, title, className }: CategoryCardProps): JSX.Element {
+function CategoryCard({
+  image,
+  title,
+  onClick,
+  className,
+}: CategoryCardProps): JSX.Element {
   return (
-    <div className={cn("flex flex-col px-3 py-2",className)}>
-      <img src={image.link} alt={image.alt} loading="lazy" className="w-full object-contain h-28 sm:h-34 lg:h-48 m-0 rounded-xl border-transparent" />
-      <h4 className="font-[retrofloral] text-lg lg:text-2xl md:text-xl text-center">{ title }</h4>
+    <div className={cn("flex flex-col px-3 py-2", className)} onClick={onClick}>
+      <img
+        src={image.link}
+        alt={image.alt}
+        loading="lazy"
+        className="w-full object-contain h-28 sm:h-34 lg:h-48 m-0 rounded-xl border-transparent"
+      />
+      <h4 className="font-[retrofloral] text-lg lg:text-2xl md:text-xl text-center">
+        {title}
+      </h4>
     </div>
-  )
+  );
 }

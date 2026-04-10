@@ -13,4 +13,5 @@ export interface CategoryCardProps{
   },
   title: string
   className?: string
+  onClick : () => void
 }

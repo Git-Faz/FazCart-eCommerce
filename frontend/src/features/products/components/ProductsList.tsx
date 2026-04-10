@@ -39,7 +39,10 @@ export default function ProductsList({ query: propQuery, category: propCategory,
   useEffect(() => {
     setPage(0);
   }, [query]);
- console.log("SIZE:", size);
+  
+  console.log("base url: ",import.meta.env.VITE_API_BASE_URL)
+  console.log("SIZE:", size);
+  console.log("PRODUCTS: ", products)
   function handleAddToCart(prodId: number, qty = 1) {
     if (!isLoggedIn) {
       toast.info(
