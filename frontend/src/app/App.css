@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-darkest-blue: rgb(0 6 20);
+  --color-darker-blue: #060e21
+}
+
 /* global.css */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -98,7 +103,7 @@ body {
     min-height: fit-content;
     height: fit-content;
 
-    @apply bg-white/90 dark:bg-[#000614]/70;
+    @apply bg-white/90 dark:bg-darkest-blue/70;
 }
 
 .nav-item {

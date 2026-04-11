@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger }
   from "@/shared/components/ui/navigation-menu";
 import { HomeIcon, MoonIcon, SunIcon, User2Icon, MenuIcon, } from "lucide-react";
@@ -67,7 +67,7 @@ const Header = (): JSX.Element => {
   return (
     <div className="header">
         <NavigationMenu viewport={!isDesktop} className="mx-auto h-fit w-full max-w-none [&>div]:w-full">
-          <NavigationMenuList id="navmenu" className="w-full px-2 py-2">
+          <NavigationMenuList id="navmenu" className="w-full p-0!">
             {/* MOBILE LAYOUT */}
             <div className="flex flex-col gap-2 md:hidden w-full">
               <div className="flex items-center mx-auto">
@@ -153,7 +153,7 @@ const Header = (): JSX.Element => {
                   <NavigationMenuTrigger>
                     <User2Icon size={20} />
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="p-3 flex flex-col gap-2 z-50 bg-[#000614]">
+                  <NavigationMenuContent className="p-3 flex flex-col gap-2 z-50 dark:bg-[#000614] bg-amber-50/50 border-none">
                     {navLinks.map((link) => (
                       <NavigationMenuLink asChild key={link.href}>
                         <Link to={link.href}>{link.label}</Link>
@@ -172,11 +172,11 @@ const Header = (): JSX.Element => {
 
       {isDesktop && (
         <NavigationMenu viewport={false} className="mx-auto w-full max-w-none bg-white/90 dark:bg-[#000614]/70 ">
-          <NavigationMenuList className="flex w-full gap-x-5 px-2 py-1 overflow-x-auto scrollbar-hide sm:px-3 space-between">
+          <NavigationMenuList className="flex w-full gap-x-5 px-2 py-1.5 overflow-x-auto scrollbar-hide sm:px-3 space-between">
             {categories.map((category) => (
               <NavigationMenuItem key={category.label}>
                 <NavigationMenuLink
-                  asChild className="nav-item px-3 py-1.5 text-sm md:text-lg lg:text-lg font-semibold tracking-wider 
+                  asChild className="nav-item px-3 py-0 text-sm md:text-lg lg:text-lg font-semibold tracking-wider 
                   rounded-md whitespace-nowrap hover:bg-accent hover:text-accent-foreground transition">
                   <Link to={category.href}>{category.label}</Link>
                 </NavigationMenuLink>

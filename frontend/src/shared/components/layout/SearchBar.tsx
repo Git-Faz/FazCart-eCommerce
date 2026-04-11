@@ -10,10 +10,7 @@ interface SearchBarProps {
   className?: string;
 }
 
-export default function SearchBar({
-  onSearch,
-  className,
-}: SearchBarProps): JSX.Element {
+export default function SearchBar({ onSearch, className }: SearchBarProps): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const urlQuery = searchParams.get("name") ?? "";
   const [query, setQuery] = useState(urlQuery);
@@ -21,7 +18,7 @@ export default function SearchBar({
   const location = useLocation();
 
   const isOnProductsPage =
-    location.pathname === "/products" || location.pathname === "/";
+    location.pathname === "/products";
 
   const navigateOrSearch = (trimmed: string) => {
     if (isOnProductsPage) {
