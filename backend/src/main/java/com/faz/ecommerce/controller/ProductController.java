@@ -25,15 +25,13 @@ public class ProductController {
     public ResponseEntity<Page<Product>> getProducts(
         @RequestParam(required = false) String category,
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "15") int size
+        @RequestParam(defaultValue = "15") int size,
+        @RequestParam(defaultValue = "price") String sortBy,
+        @RequestParam(defaultValue = "asc") String direction
     ) {
-        if (category != null) {
-            return ResponseEntity.ok(
-                productService.getProductsByCategory(category, page, size)
-            );
-        }
-
-        return ResponseEntity.ok(productService.getAllProducts(page, size));
+        return ResponseEntity.ok(
+            productService.getProducts(category, page, size, sortBy, direction)
+        );
     }
 
     @GetMapping("/search")
@@ -72,7 +70,6 @@ public class ProductController {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {

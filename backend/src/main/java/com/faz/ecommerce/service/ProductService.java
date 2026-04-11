@@ -6,15 +6,13 @@ import com.faz.ecommerce.exception.BadRequestException;
 import com.faz.ecommerce.exception.ResourceNotFoundException;
 import com.faz.ecommerce.repository.ProductRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +20,23 @@ public class ProductService {
 
     private final ProductRepo productRepo;
 
-    public Page<Product> getAllProducts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Product> getProducts(
+        String category,
+        int page,
+        int size,
+        String sortBy,
+        String direction
+    ) {
+        Sort sort = direction.equalsIgnoreCase("asc")
+            ? Sort.by(sortBy).ascending()
+            : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        if (category != null) {
+            return productRepo.findByCategory(category, pageable);
+        }
+
         return productRepo.findAll(pageable);
     }
 
@@ -48,37 +61,47 @@ public class ProductService {
     }
 
     public Product updateProduct(Long id, ProductRequest request) {
-        Product p = productRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Item Not found"));
+        Product p = productRepo
+            .findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Item Not found"));
 
-        if (request.getName() != null)
-            p.setName(request.getName());
-        if (request.getDescription() != null)
-            p.setDescription(request.getDescription());
-        if (request.getPrice() != null)
-            p.setPrice(request.getPrice());
-        if (request.getImageUrl() != null)
-            p.setImageUrl(request.getImageUrl());
+        if (request.getName() != null) p.setName(request.getName());
+        if (request.getDescription() != null) p.setDescription(
+            request.getDescription()
+        );
+        if (request.getPrice() != null) p.setPrice(request.getPrice());
+        if (request.getImageUrl() != null) p.setImageUrl(request.getImageUrl());
 
         return productRepo.save(p);
-
     }
 
     public void deleteProduct(Long id) {
-        Product p = productRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        Product p = productRepo
+            .findById(id)
+            .orElseThrow(() ->
+                new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Product not found"
+                )
+            );
 
         productRepo.delete(p);
     }
 
-    public Page<Product> getProductsByCategory(String category, int page, int size) {
+    public Page<Product> getProductsByCategory(
+        String category,
+        int page,
+        int size
+    ) {
         Pageable pageable = PageRequest.of(page, size);
         return productRepo.findByCategory(category, pageable);
     }
 
     public Product getProductById(Long id) {
-        return productRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product doesn't exist"));
+        return productRepo
+            .findById(id)
+            .orElseThrow(() ->
+                new ResourceNotFoundException("Product doesn't exist")
+            );
     }
-
 }

@@ -24,10 +24,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
             WHERE LOWER(c) = LOWER(:category)
         """
     )
-    Page<Product> findByCategory(
-        @Param("category") String category,
-        Pageable pageable
-    );
+    Page<Product> findByCategory( @Param("category") String category, Pageable pageable);
 
     boolean existsProductById(Long id);
     boolean existsByNameIgnoreCase(String name);
