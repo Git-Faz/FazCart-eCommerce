@@ -32,15 +32,14 @@ function Products(): JSX.Element {
         <span className="text-sm font-medium">Sort By</span>
 
         <Select value={sort} onValueChange={setSort}>
-          <SelectTrigger className="w-[200px] dark:bg-inherit bg-inherit focus:outline-0 focus:ring-0!">
-            <SelectValue placeholder="Sort By" />
+          <SelectTrigger className="w-25 sm:w-40 lg:w-50 md:w-50 max-w-50 dark:bg-inherit bg-inherit focus:outline-0 focus:ring-0!">
+            <SelectValue placeholder="Sort By" className="dark:text-white dark:font-light" />
           </SelectTrigger>
 
-          <SelectContent className="dark:bg-darkest-blue/95">
+          <SelectContent className="dark:bg-darkest-blue/95 bg-amber-50/50">
             <SelectGroup>
               <SelectItem value="price_asc">Price: Ascending</SelectItem>
               <SelectItem value="price_desc">Price: Descending</SelectItem>
-              <SelectItem value="default">Default</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
