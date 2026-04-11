@@ -1,7 +1,7 @@
 import api from "@/app/axios";
-import type { Product, ProductsPage } from "./types";
+import type { GetProductParams, Product, ProductsPage } from "./types";
 
-export const getProducts = (params: {category?: string;page?: number;size?: number;}) => {
+export const getProducts = (params: GetProductParams) => {
   return api.get<ProductsPage>("/products", { params });
 };
 

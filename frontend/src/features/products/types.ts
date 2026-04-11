@@ -44,7 +44,9 @@ export interface ProductsListProps {
   category?: string;
   hidePagination?: boolean;
   size?: number;
-  className?: string
+  className?: string;
+  sortBy?: string;
+  direction?: string;
 }
 
 export interface ProductsPage {
@@ -54,3 +56,11 @@ export interface ProductsPage {
   number: number;
   size: number;
 }
+
+export interface GetProductParams {
+  category?: string;
+  page?: number;
+  size?: number;
+  sortBy?: string;
+  direction?: string;
+};

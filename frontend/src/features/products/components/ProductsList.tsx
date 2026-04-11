@@ -11,8 +11,8 @@ import { useProducts } from "../queries";
 import { type ProductsListProps } from "../types";
 import { cn } from "@/shared/utils/utils";
 
-export default function ProductsList({ query: propQuery, category: propCategory, hidePagination = false, size, className }
-  : ProductsListProps): JSX.Element {
+export default function ProductsList({ query: propQuery, category: propCategory,
+  hidePagination = false, size, sortBy, direction, className } : ProductsListProps): JSX.Element {
   const [searchParams] = useSearchParams();
 
   const query =
@@ -25,12 +25,8 @@ export default function ProductsList({ query: propQuery, category: propCategory,
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  const { data, isLoading, isFetching, isError } = useProducts({
-    query: query,
-    page,
-    category,
-    ...(size !== undefined && { size }), 
-  });
+  const { data, isLoading, isFetching, isError } = useProducts({ query: query, page, category,
+    ...(size !== undefined && { size }), sortBy, direction});
   const { mutate: addToCart, isPending } = useAddToCart();
 
   const products = data?.content ?? [];
@@ -38,11 +34,8 @@ export default function ProductsList({ query: propQuery, category: propCategory,
 
   useEffect(() => {
     setPage(0);
-  }, [query]);
-  
-  console.log("base url: ",import.meta.env.VITE_API_BASE_URL)
-  console.log("SIZE:", size);
-  console.log("PRODUCTS: ", products)
+  }, [query, category, sortBy, direction]);
+
   function handleAddToCart(prodId: number, qty = 1) {
     if (!isLoggedIn) {
       toast.info(
