@@ -68,7 +68,7 @@ function Products(): JSX.Element {
                 setAppliedMin(tempMin);
                 setAppliedMax(tempMax);
               }}
-              className=" text-sm px-3 py-1.5 border border-amber-200 
+              className=" text-sm px-3 py-1.5 border border-amber-200 dark:bg-darkest-blue dark:border-blue-950
               rounded-md dark:hover:bg-blue-950/60 bg-amber-100/70 hover:bg-amber-200 transition"
             >
               Apply
@@ -82,7 +82,7 @@ function Products(): JSX.Element {
 
           <Select value={sort} onValueChange={setSort}>
             <SelectTrigger className=" w-36 sm:w-40 md:w-44 dark:bg-darkest-blue/70 bg-amber-100/70 border 
-              dark:border-white/10 focus:ring-0 active:border-none! border-amber-200">
+              dark:border-blue-950 focus:ring-0 active:border-none! border-amber-200">
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
 
