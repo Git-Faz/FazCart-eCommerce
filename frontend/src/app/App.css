@@ -8,6 +8,16 @@
   --color-darker-blue: #060e21
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* global.css */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

@@ -47,6 +47,8 @@ export interface ProductsListProps {
   className?: string;
   sortBy?: string;
   direction?: string;
+  minPrice?: number;
+  maxPrice?:number
 }
 
 export interface ProductsPage {
@@ -63,4 +65,17 @@ export interface GetProductParams {
   size?: number;
   sortBy?: string;
   direction?: string;
+  minPrice?: number;
+  maxPrice?: number;
+};
+
+export interface UseProductsParams {
+  query?: string;
+  category?: string;
+  page: number;
+  size?: number;
+  sortBy?: string;
+  direction?: string;
+  minPrice?: number;
+  maxPrice?: number;
 };

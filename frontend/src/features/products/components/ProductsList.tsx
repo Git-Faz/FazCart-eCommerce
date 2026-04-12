@@ -11,8 +11,17 @@ import { useProducts } from "../queries";
 import { type ProductsListProps } from "../types";
 import { cn } from "@/shared/utils/utils";
 
-export default function ProductsList({ query: propQuery, category: propCategory,
-  hidePagination = false, size, sortBy, direction, className } : ProductsListProps): JSX.Element {
+export default function ProductsList({
+  query: propQuery,
+  category: propCategory,
+  hidePagination = false,
+  size,
+  sortBy,
+  direction,
+  minPrice,
+  maxPrice,
+  className,
+}: ProductsListProps): JSX.Element {
   const [searchParams] = useSearchParams();
 
   const query =
@@ -25,8 +34,16 @@ export default function ProductsList({ query: propQuery, category: propCategory,
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  const { data, isLoading, isFetching, isError } = useProducts({ query: query, page, category,
-    ...(size !== undefined && { size }), sortBy, direction});
+  const { data, isLoading, isFetching, isError } = useProducts({
+    query: query,
+    page,
+    category,
+    ...(size !== undefined && { size }),
+    sortBy,
+    direction,
+    minPrice,
+    maxPrice
+  });
   const { mutate: addToCart, isPending } = useAddToCart();
 
   const products = data?.content ?? [];
@@ -34,7 +51,7 @@ export default function ProductsList({ query: propQuery, category: propCategory,
 
   useEffect(() => {
     setPage(0);
-  }, [query, category, sortBy, direction]);
+  }, [query, category, sortBy, direction, minPrice, maxPrice]);
 
   function handleAddToCart(prodId: number, qty = 1) {
     if (!isLoggedIn) {
@@ -68,8 +85,13 @@ export default function ProductsList({ query: propQuery, category: propCategory,
   }
 
   return (
-    <div className={cn("w-full px-2 sm:px-3 md:px-1 lg:px-0 bg-transparent", className)}>
-      <div className= "grid grid-cols-2 overflow-x-scroll gap-5 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,220px))] md:justify-center">
+    <div
+      className={cn(
+        "w-full px-2 sm:px-3 md:px-1 lg:px-0 bg-transparent",
+        className,
+      )}
+    >
+      <div className="grid grid-cols-2 overflow-x-scroll gap-5 sm:gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,220px))] md:justify-center">
         {products.map((product) => (
           <ProductCard
             key={product.id}

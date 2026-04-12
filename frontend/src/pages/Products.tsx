@@ -7,13 +7,17 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
 
 function Products(): JSX.Element {
   const [sort, setSort] = useState("default");
+  const [tempMin, setTempMin] = useState<number | undefined>();
+  const [tempMax, setTempMax] = useState<number | undefined>();
+
+  const [appliedMin, setAppliedMin] = useState<number | undefined>();
+  const [appliedMax, setAppliedMax] = useState<number | undefined>();
 
   const getSortParams = () => {
     switch (sort) {
@@ -27,25 +31,76 @@ function Products(): JSX.Element {
   };
 
   return (
-    <Body className="realtive mx-auto min-h-full w-full max-w-7xl px-2 py-5 sm:px-3 md:px-4 md:py-8 lg:px-4 lg:py-10">
-      <div className="flex items-center justify-end gap-3 mb-4 text-right w-[97%] px-1">
-        <span className="text-sm font-medium">Sort By</span>
+    <Body className="realtive mx-auto min-h-full w-full max-w-7xl px-2 py-5 sm:px-3 md:px-4 md:py-8 lg:px-4 lg:py-8">
+      {/* FILTER + SORT BAR */}
+      <div
+        className=" flex flex-wrap items-center gap-3 mb-5 justify-start md:justify-between lg:justify-end
+        w-[93%] px-2 md:mx-auto lg:px-0 "
+      >
+        {/* FILTER */}
+        <div
+          className=" flex items-center gap-3 w-full sm:w-auto pb-2 border-b border-white/10 md:border-none
+          md:pb-0 lg:border-r lg:pr-6 "
+        >
+          <span className="text-sm font-medium whitespace-nowrap">
+            Filter Price
+          </span>
 
-        <Select value={sort} onValueChange={setSort}>
-          <SelectTrigger className="w-25 sm:w-40 lg:w-50 md:w-50 max-w-50 dark:bg-inherit bg-inherit focus:outline-0 focus:ring-0!">
-            <SelectValue placeholder="Sort By" className="dark:text-white dark:font-light" />
-          </SelectTrigger>
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              placeholder="Min"
+              onChange={(e) =>
+                setTempMin(e.target.value ? Number(e.target.value) : undefined)
+              }
+              className=" w-16 sm:w-20 md:w-24 bg-darkest-blue/70 p-1.5 rounded-md text-sm focus:outline-none "
+            />
 
-          <SelectContent className="dark:bg-darkest-blue/95 bg-amber-50/50">
-            <SelectGroup>
-              <SelectItem value="price_asc">Price: Ascending</SelectItem>
-              <SelectItem value="price_desc">Price: Descending</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+            <input
+              type="number"
+              placeholder="Max"
+              onChange={(e) =>
+                setTempMax(e.target.value ? Number(e.target.value) : undefined)
+              }
+              className="w-16 sm:w-20 md:w-24bg-darkest-blue/70p-1.5 rounded-mdtext-smfocus:outline-none"
+            />
+
+            <button
+              onClick={() => {
+                setAppliedMin(tempMin);
+                setAppliedMax(tempMax);
+              }}
+              className=" text-sm px-3 py-1.5 border border-white/20 rounded-md hover:bg-blue-950/60 transition"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+
+        {/* SORT */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium whitespace-nowrap">Sort By</span>
+
+          <Select value={sort} onValueChange={setSort}>
+            <SelectTrigger className=" w-36 sm:w-40 md:w-44 bg-darkest-blue/70 border border-white/10 focus:ring-0">
+              <SelectValue placeholder="Sort By" />
+            </SelectTrigger>
+
+            <SelectContent className="bg-darkest-blue/95">
+              <SelectGroup>
+                <SelectItem value="price_asc">Price: Ascending</SelectItem>
+                <SelectItem value="price_desc">Price: Descending</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      <ProductsList {...getSortParams()} />
+      <ProductsList
+        {...getSortParams()}
+        minPrice={appliedMin}
+        maxPrice={appliedMax}
+      />
     </Body>
   );
 }
