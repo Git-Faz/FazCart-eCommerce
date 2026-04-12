@@ -33,13 +33,11 @@ function Products(): JSX.Element {
   return (
     <Body className="realtive mx-auto min-h-full w-full max-w-7xl px-2 py-5 sm:px-3 md:px-4 md:py-8 lg:px-4 lg:py-8">
       {/* FILTER + SORT BAR */}
-      <div
-        className=" flex flex-wrap items-center gap-3 mb-5 justify-start md:justify-between lg:justify-end
+      <div className=" flex flex-wrap items-center gap-3 mb-5 justify-start md:justify-between lg:justify-end
         w-[93%] px-2 md:mx-auto lg:px-0 "
       >
         {/* FILTER */}
-        <div
-          className=" flex items-center gap-3 w-full sm:w-auto pb-2 border-b border-white/10 md:border-none
+        <div className=" flex items-center gap-3 w-full sm:w-auto pb-2 border-b border-white/10 md:border-none
           md:pb-0 lg:border-r lg:pr-6 "
         >
           <span className="text-sm font-medium whitespace-nowrap">
@@ -53,7 +51,7 @@ function Products(): JSX.Element {
               onChange={(e) =>
                 setTempMin(e.target.value ? Number(e.target.value) : undefined)
               }
-              className=" w-16 sm:w-20 md:w-24 bg-darkest-blue/70 p-1.5 rounded-md text-sm focus:outline-none "
+              className=" w-16 sm:w-20 md:w-24 dark:bg-darkest-blue/70 bg-amber-100/70 p-1.5 rounded-md text-sm focus:outline-none "
             />
 
             <input
@@ -62,7 +60,7 @@ function Products(): JSX.Element {
               onChange={(e) =>
                 setTempMax(e.target.value ? Number(e.target.value) : undefined)
               }
-              className="w-16 sm:w-20 md:w-24bg-darkest-blue/70p-1.5 rounded-mdtext-smfocus:outline-none"
+              className="w-16 sm:w-20 md:w-24 dark:bg-darkest-blue/70 bg-amber-100/70 p-1.5 rounded-md text-sm focus:outline-none"
             />
 
             <button
@@ -82,11 +80,12 @@ function Products(): JSX.Element {
           <span className="text-sm font-medium whitespace-nowrap">Sort By</span>
 
           <Select value={sort} onValueChange={setSort}>
-            <SelectTrigger className=" w-36 sm:w-40 md:w-44 bg-darkest-blue/70 border border-white/10 focus:ring-0">
+            <SelectTrigger className=" w-36 sm:w-40 md:w-44 dark:bg-darkest-blue/70 bg-amber-100/70 border 
+              dark:border-white/10 focus:ring-0 active:border-none!">
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
 
-            <SelectContent className="bg-darkest-blue/95">
+            <SelectContent className="dark:bg-darkest-blue/95 bg-amber-100/70">
               <SelectGroup>
                 <SelectItem value="price_asc">Price: Ascending</SelectItem>
                 <SelectItem value="price_desc">Price: Descending</SelectItem>
