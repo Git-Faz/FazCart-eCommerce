@@ -68,7 +68,8 @@ function Products(): JSX.Element {
                 setAppliedMin(tempMin);
                 setAppliedMax(tempMax);
               }}
-              className=" text-sm px-3 py-1.5 border border-white/20 rounded-md hover:bg-blue-950/60 transition"
+              className=" text-sm px-3 py-1.5 border border-amber-200 
+              rounded-md dark:hover:bg-blue-950/60 bg-amber-100/70 hover:bg-amber-200 transition"
             >
               Apply
             </button>
@@ -81,11 +82,11 @@ function Products(): JSX.Element {
 
           <Select value={sort} onValueChange={setSort}>
             <SelectTrigger className=" w-36 sm:w-40 md:w-44 dark:bg-darkest-blue/70 bg-amber-100/70 border 
-              dark:border-white/10 focus:ring-0 active:border-none!">
+              dark:border-white/10 focus:ring-0 active:border-none! border-amber-200">
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
 
-            <SelectContent className="dark:bg-darkest-blue/95 bg-amber-100/70">
+            <SelectContent className="dark:bg-darkest-blue/95 bg-amber-50 border-amber-200">
               <SelectGroup>
                 <SelectItem value="price_asc">Price: Ascending</SelectItem>
                 <SelectItem value="price_desc">Price: Descending</SelectItem>
