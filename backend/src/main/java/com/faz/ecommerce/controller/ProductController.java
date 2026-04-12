@@ -4,11 +4,8 @@ import com.faz.ecommerce.dto.ProductRequest;
 import com.faz.ecommerce.entity.Product;
 import com.faz.ecommerce.service.ProductService;
 import jakarta.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,13 +21,23 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Page<Product>> getProducts(
         @RequestParam(required = false) String category,
+        @RequestParam(required = false) Long minPrice,
+        @RequestParam(required = false) Long maxPrice,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "15") int size,
         @RequestParam(defaultValue = "price") String sortBy,
         @RequestParam(defaultValue = "asc") String direction
     ) {
         return ResponseEntity.ok(
-            productService.getProducts(category, page, size, sortBy, direction)
+            productService.getProducts(
+                category,
+                minPrice,
+                maxPrice,
+                page,
+                size,
+                sortBy,
+                direction
+            )
         );
     }
 
