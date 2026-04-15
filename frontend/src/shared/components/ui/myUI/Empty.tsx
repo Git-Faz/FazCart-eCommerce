@@ -1,9 +1,6 @@
 import type { JSX } from "react";
 import { cn } from "@/shared/utils/utils";
 import { motion } from "framer-motion";
-import { useTheme } from "@/app/theme/useTheme";
-import darkBg from "@/assets/svg/emptyDark.svg";
-import lightBg from "@/assets/svg/emptyLight.svg";
 
 interface EmptyStateProps {
   message: string, desClassName?: string
@@ -31,11 +28,9 @@ const letter = {
 
 export default function Empty({message, desClassName}: EmptyStateProps): JSX.Element {
 
-    const {theme} = useTheme();
-
     const text = "EMPTY".split("");
 
-    const bg = theme === "dark" ? darkBg : lightBg;
+    //const bg = theme === "dark" ? darkBg : lightBg;
 
   return (
     <div
