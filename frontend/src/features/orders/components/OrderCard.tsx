@@ -27,7 +27,6 @@ const OrderCard = ({ id, items, totalAmount, status }: OrderProp): JSX.Element =
 
               )}
 
-
             <span>Total: ₹{totalAmount}</span>
             <span> Status: {status}</span>
         
