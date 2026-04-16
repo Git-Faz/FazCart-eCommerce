@@ -22,8 +22,8 @@ const Cart = (): JSX.Element => {
     const { mutate: clearCart, isPending: isClearing } = useClearCart();
 
     console.log(cart);
-console.log(cart?.[0]);
-console.log(cart?.[0]?.productId);
+    console.log(cart?.[0]);
+    console.log(cart?.[0]?.productId);
     
 
     if (!isLoggedIn) {

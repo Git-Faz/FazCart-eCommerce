@@ -14,31 +14,51 @@ const Order = (): JSX.Element => {
     const { isLoggedIn } = useAuth();
     const [page, setPage] = useState(0);
 
-    const { data: orders, isLoading, isFetching, isError } = useOrders(page);
+    const {
+        data: orders,
+        isLoading,
+        isFetching,
+        isError
+    } = useOrders(page);
 
-    const totalPages = orders?.totalPages ?? 0
+    const totalPages = orders?.totalPages ?? 0;
 
-    if (!isLoggedIn) return <Error errorTitle="LOGIN" errorMsg="To view your ORDERS ..."></Error>
+    if (!isLoggedIn) {
+        return (
+            <Error
+                errorTitle="LOGIN"
+                errorMsg="To view your ORDERS ..."
+            />
+        );
+    }
 
-    if (isLoading || isFetching) return <Loading message="Loading your Orders..." />;
+    if (isLoading || isFetching) {
+        return <Loading message="Loading your Orders..." />;
+    }
 
     if (isError) {
         return (
-            <Error errorMsg="Could not load orders... Please try again later"/>
-        )
+            <Error errorMsg="Could not load orders... Please try again later" />
+        );
     }
 
-    if (orders?.content.length === 0) return <Empty message="No orders yet... Place your first Order"/>;
-
+    if (!orders || orders.content.length === 0) {
+        return (
+            <Empty message="No orders yet... Place your first Order" />
+        );
+    }
 
     return (
         <Body>
             <div className="m-3 flex h-full w-full flex-col space-y-8 p-2 sm:m-5 sm:p-3 sm:space-y-10">
+
                 <h1 id="title">Your Orders</h1>
+
+                {/* Orders List */}
                 <div className="flex flex-col">
-                    {orders?.content.map((order: OrderProp, index: number) => (
+                    {orders.content.map((order: OrderProp) => (
                         <OrderCard
-                            key={index}
+                            key={order.id}
                             id={order.id}
                             items={order.items}
                             totalAmount={order.totalAmount}
@@ -46,27 +66,34 @@ const Order = (): JSX.Element => {
                         />
                     ))}
                 </div>
+
+                {/* Pagination */}
                 <div className="m-2 flex flex-wrap items-center justify-start gap-3 p-1 sm:m-5 sm:p-3">
+
                     <Button
-                        type={"button"} variant={"outline"}
+                        type="button"
+                        variant="outline"
                         onClick={() => setPage((prev) => prev - 1)}
                         disabled={page === 0}
                     >
-                    Previous
+                        Previous
                     </Button>
+
                     <span>
                         Page {page + 1} of {totalPages}
                     </span>
+
                     <Button
-                        disabled={page + 1 >= totalPages}
                         onClick={() => setPage((prev) => prev + 1)}
+                        disabled={page + 1 >= totalPages}
                     >
-                    Next
+                        Next
                     </Button>
+
                 </div>
             </div>
         </Body>
     );
-}
+};
 
 export default Order;

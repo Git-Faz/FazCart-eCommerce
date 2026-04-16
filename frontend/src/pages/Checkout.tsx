@@ -47,9 +47,10 @@ const Checkout = (): JSX.Element => {
 
     const handleSubmission = async () => {
         try {
-            await createOrder();
-            alert("Order placed successfully");
-            navigate("/orders");
+            const res = await createOrder();
+            const orderId = res.data.id;
+
+            navigate(`/payment/${orderId}`);
         } catch (err) {
             console.error("Order creation failed", err);
             alert("Failed to place order");
@@ -114,19 +115,13 @@ const Checkout = (): JSX.Element => {
                         </div>
 
                         <div className="pt-4 space-y-2">
-                            <h2 className="text-lg font-semibold">Choose a payment method</h2>
+                            <h2 className="text-lg font-semibold">Place Order:</h2>
                             <div className="flex flex-col gap-2">
                                 <Button
                                     onClick={handleSubmission}
                                     className="bg-green-300 text-black hover:bg-green-400"
                                 >
-                                    Pay from fazWallet
-                                </Button>
-                                <Button
-                                    onClick={handleSubmission}
-                                    className="bg-blue-300 text-black hover:bg-blue-400"
-                                >
-                                    NetBanking
+                                    Place Order
                                 </Button>
                             </div>
                         </div>
