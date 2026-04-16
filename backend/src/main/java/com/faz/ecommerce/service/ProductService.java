@@ -12,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -33,6 +36,10 @@ public class ProductService {
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
+        if (category != null) {
+            category = category.trim().toLowerCase();
+        }
+
         return productRepo.filterProducts(
                 category,
                 minPrice,
@@ -48,15 +55,26 @@ public class ProductService {
     }
 
     public Product addSingleProduct(ProductRequest request) {
+
         if (productRepo.existsByNameIgnoreCase(request.getName())) {
             throw new BadRequestException("Product already exists");
         }
 
         Product product = new Product();
-        product.setName(request.getName());
+
+        product.setName(request.getName().trim());
+
         product.setPrice(request.getPrice());
-        product.setDescription(request.getDescription());
-        product.setCategories(request.getCategories());
+        product.setDescription(request.getDescription().trim());
+
+        // normalize categories
+        Set<String> normalizedCategories = request.getCategories()
+                .stream()
+                .map(c -> c.trim().toLowerCase())
+                .collect(Collectors.toSet());
+
+        product.setCategories(normalizedCategories);
+
         product.setImageUrl(request.getImageUrl());
 
         return productRepo.save(product);

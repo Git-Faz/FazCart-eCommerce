@@ -11,30 +11,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
     Page<Product> findByNameContainingIgnoreCase(
-        String keyword,
-        Pageable pageable
+            String keyword,
+            Pageable pageable
     );
 
-    @Query(
-        """
-        SELECT p FROM Product p
-        JOIN p.categories c
-        WHERE (:category IS NULL OR LOWER(c) = LOWER(:category))
-        AND (:min IS NULL OR p.price >= :min)
-        AND (:max IS NULL OR p.price <= :max)
-        """
-    )
+    @Query("""
+                SELECT p FROM Product p
+                JOIN p.categories c
+                WHERE (:category IS NULL OR c = :category)
+                AND (:min IS NULL OR p.price >= :min)
+                AND (:max IS NULL OR p.price <= :max)
+            """)
     Page<Product> filterProducts(
-        @Param("category") String category,
-        @Param("min") Long min,
-        @Param("max") Long max,
-        Pageable pageable
+            @Param("category") String category,
+            @Param("min") Long min,
+            @Param("max") Long max,
+            Pageable pageable
     );
 
     boolean existsByNameIgnoreCase(String name);
-    
-    @Query("""
-        SELECT p FROM Product p WHERE p.stock != 0
-        """)
-    boolean isInStock(String name);
+
 }
