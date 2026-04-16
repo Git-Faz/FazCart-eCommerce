@@ -33,6 +33,6 @@ public class Order {
     private Long total;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, name= "status")
     private OrderStatus status;
 }

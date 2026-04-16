@@ -1,8 +1,10 @@
 package com.faz.ecommerce.enums;
 
 public enum OrderStatus {
-    PROCESSING,
+    PENDING,
     DISPATCHED,
     CANCELLED,
-    DELIVERED
+    DELIVERED,
+    FAILED,
+    CONFIRMED
 }

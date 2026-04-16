@@ -32,4 +32,9 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     );
 
     boolean existsByNameIgnoreCase(String name);
+    
+    @Query("""
+        SELECT p FROM Product p WHERE p.stock != 0
+        """)
+    boolean isInStock(String name);
 }

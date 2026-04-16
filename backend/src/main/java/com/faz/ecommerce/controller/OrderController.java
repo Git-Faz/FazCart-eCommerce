@@ -34,6 +34,22 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/{orderId}/pay")
+    public OrderResponse payOrder(@PathVariable Long orderId) {
+
+        // dummy payment
+        boolean success = Math.random() > 0.3;
+
+        Order order;
+        if (success) {
+            order = orderService.confirmOrderPayment(orderId);
+        } else {
+            order = orderService.failOrderPayment(orderId);
+        }
+
+        return orderService.mapToOrderResponse(order);
+    }
+
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderResponse> getOrderById (@PathVariable Long orderId){
         Order order = orderRepo.getOrderById(orderId);
