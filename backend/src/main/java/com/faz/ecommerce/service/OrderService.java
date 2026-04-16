@@ -119,6 +119,7 @@ public class OrderService {
         return orderRepo.save(order);
     }
 
+    @Transactional(readOnly = true)
     public Page<Order> getUserOrders(Long userId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return orderRepo.findByUserId(userId, pageable);
@@ -165,7 +166,7 @@ public class OrderService {
         return new CartItemResponse(
                 orderItem.getId(),
                 orderItem.getProduct().getId(),
-                orderItem.getOrder().getUser().getId(),
+                orderItem.getOrder().getId(),
                 orderItem.getProduct().getName(),
                 (long) (orderItem.getPriceAtPurchase()),
                 orderItem.getProduct().getImageUrl(),
