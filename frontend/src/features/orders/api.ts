@@ -4,6 +4,10 @@ import type { Page } from "@/shared/types";
 
 export const createOrder = () => api.post<OrderProp>("/orders");
 
+export const payOrder = (orderId: number) =>
+    api.post<OrderProp>(`/orders/${orderId}/pay`)
+
+
 export const getAllOrders = (page: number, size: number) => {
     return api.get<Page<OrderProp>>("/orders", {
         params: { page, size }
