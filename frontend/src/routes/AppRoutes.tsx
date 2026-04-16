@@ -7,6 +7,7 @@ import Checkout from "@/pages/Checkout";
 import Auth from "@/pages/Auth";
 import Order from "@/pages/Order"
 import UserProfile from "@/pages/UserProfile";
+import Payment from "@/pages/Payment"
 import type { JSX } from "react";
 
 const AppRoutes = (): JSX.Element => {
@@ -18,6 +19,7 @@ const AppRoutes = (): JSX.Element => {
             <Route path = "/products/:id" element={<ProductDetails/>}></Route>
             <Route path ="/checkout" element={<Checkout/>}></Route>
             <Route path="/orders" element={<Order/>}/>
+            <Route path="/payment/:orderId" element={<Payment/>}/>
             <Route path ="/auth" element={<Auth/>}></Route>
             <Route path="/account" element={<UserProfile/>} />
         </Routes>
