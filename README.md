@@ -31,6 +31,7 @@
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
   - [Docker Setup](#docker-setup)
+- [Testing](#-testing)
 - [API Documentation](#-api-documentation)
 - [Project Structure](#-project-structure)
 
@@ -78,6 +79,8 @@
 | [![Sonner](https://img.shields.io/badge/Sonner-000000?logo=sonner&logoColor=white)](https://sonner.emilkowal.ski/) | Toast notifications |
 | [![next-themes](https://img.shields.io/badge/next--themes-000000?logo=nextdotjs&logoColor=white)](https://github.com/pacocoursey/next-themes) | Dark/light mode |
 | [![Lucide React](https://img.shields.io/badge/Lucide%20React-F56040?logo=lucide&logoColor=white)](https://lucide.dev/) | Icon library |
+| [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/) | Unit & component testing |
+| [![React Testing Library](https://img.shields.io/badge/React%20Testing%20Library-E33332?logo=testinglibrary&logoColor=white)](https://testing-library.com/) | React component testing |
 
 ### ⚙️ Backend
 
@@ -93,6 +96,9 @@
 | [![SpringDoc OpenAPI](https://img.shields.io/badge/SpringDoc%20OpenAPI-6DB33F?logo=swagger&logoColor=white)](https://springdoc.org/) | Swagger UI documentation |
 | [![Lombok](https://img.shields.io/badge/Lombok-BC1C1C?logoColor=white)](https://projectlombok.org/) | Boilerplate code reduction |
 | [![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/) | Build & dependency management |
+| [![JUnit 5](https://img.shields.io/badge/JUnit%205-25A162?logo=junit5&logoColor=white)](https://junit.org/junit5/) | Unit & integration testing |
+| [![Mockito](https://img.shields.io/badge/Mockito-78C257?logoColor=white)](https://site.mockito.org/) | Mocking & interaction testing |
+| [![MockMvc](https://img.shields.io/badge/MockMvc-6DB33F?logo=spring&logoColor=white)](https://docs.spring.io/spring-framework/reference/testing/mockmvc.html) | MVC/API testing |
 
 ### 🐳 Infrastructure
 
@@ -183,6 +189,55 @@ FazCart-eCommerce/
    ```
 
    The app will be available at `http://localhost:5173`.
+
+---
+
+## 🧪 Testing
+
+FazCart includes automated tests for both the frontend and backend, covering core user flows and API behavior without requiring external test services.
+
+### Frontend Tests
+
+The frontend uses [Vitest](https://vitest.dev/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/). API calls are mocked with Vitest so component and state tests remain fast and deterministic.
+
+The test suite covers:
+
+- 🔐 Authentication Redux state, login and registration flows, persistence, and error handling
+- 🛍️ Product API wrappers, product queries, product cards, and product-list behavior
+- 🛒 Cart intent storage, cart item rendering, and authenticated cart actions
+- 📝 Login and registration form validation and dispatch behavior
+
+Run the frontend tests:
+
+```bash
+cd frontend
+npm test
+```
+
+Run Vitest in watch mode while developing:
+
+```bash
+cd frontend
+npm run test:watch
+```
+
+### Backend Tests
+
+The backend uses Spring Boot Test, JUnit 5, Mockito, and MockMvc. The suite includes focused MVC controller tests and full application-context integration tests using the test profile and H2.
+
+The test suite covers:
+
+- 🔐 Registration and login responses, validation, and security behavior
+- 🛍️ Product listing and missing-product error responses
+- 🛒 Cart endpoint behavior, including authentication requirements and clearing the cart
+- 🏗️ Complete Spring application-context startup through the integration test profile
+
+Run the backend tests:
+
+```bash
+cd backend
+./mvnw test
+```
 
 ---
 
